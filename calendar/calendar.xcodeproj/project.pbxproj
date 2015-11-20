@@ -483,6 +483,7 @@
 				D7A7796D1BFD8ED600DB7B88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D7A7796E1BFD8ED600DB7B88 /* Build configuration list for PBXNativeTarget "calendarTests" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +492,7 @@
 				D7A779701BFD8ED600DB7B88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D7A779711BFD8ED600DB7B88 /* Build configuration list for PBXNativeTarget "calendarUITests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +501,7 @@
 				D7A779731BFD8ED600DB7B88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
