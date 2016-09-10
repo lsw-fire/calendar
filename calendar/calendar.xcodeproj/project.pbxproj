@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		191AF0861D7A847200F794F1 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191AF0851D7A847200F794F1 /* CalendarViewController.swift */; };
+		191AF0881D7A90E900F794F1 /* DayColletionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191AF0871D7A90E900F794F1 /* DayColletionViewCell.swift */; };
+		194C2D3F1D7D8E65006F4F2C /* DayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C2D3E1D7D8E65006F4F2C /* DayModel.swift */; };
+		194E8DC21D7FF778001B6BC0 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194E8DC11D7FF778001B6BC0 /* NSDateExtension.swift */; };
+		194E8DC41D81125C001B6BC0 /* LunarDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194E8DC31D81125C001B6BC0 /* LunarDate.swift */; };
+		194E8DC61D824A97001B6BC0 /* LunarSolarTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194E8DC51D824A97001B6BC0 /* LunarSolarTerm.swift */; };
+		19A892BF1D770AF8001C7B9E /* MonthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A892BE1D770AF8001C7B9E /* MonthController.swift */; };
+		19D2C6CC1D82D9E2001F0565 /* MonthSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D2C6CB1D82D9E2001F0565 /* MonthSource.swift */; };
 		D7A779471BFD8ED500DB7B88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A779461BFD8ED500DB7B88 /* AppDelegate.swift */; };
 		D7A779491BFD8ED500DB7B88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A779481BFD8ED500DB7B88 /* ViewController.swift */; };
 		D7A7794C1BFD8ED500DB7B88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7A7794A1BFD8ED500DB7B88 /* Main.storyboard */; };
@@ -34,6 +42,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		191AF0851D7A847200F794F1 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		191AF0871D7A90E900F794F1 /* DayColletionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayColletionViewCell.swift; sourceTree = "<group>"; };
+		194C2D3E1D7D8E65006F4F2C /* DayModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayModel.swift; sourceTree = "<group>"; };
+		194E8DC11D7FF778001B6BC0 /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtension.swift; sourceTree = "<group>"; };
+		194E8DC31D81125C001B6BC0 /* LunarDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarDate.swift; sourceTree = "<group>"; };
+		194E8DC51D824A97001B6BC0 /* LunarSolarTerm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarSolarTerm.swift; sourceTree = "<group>"; };
+		19A892BE1D770AF8001C7B9E /* MonthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthController.swift; sourceTree = "<group>"; };
+		19D2C6CB1D82D9E2001F0565 /* MonthSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthSource.swift; sourceTree = "<group>"; };
+		19F432CC1D83DCD9001C3DCE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D7A779431BFD8ED500DB7B88 /* calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7A779461BFD8ED500DB7B88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7A779481BFD8ED500DB7B88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,9 +91,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		194C2D3D1D7D8E32006F4F2C /* model */ = {
+			isa = PBXGroup;
+			children = (
+				194C2D3E1D7D8E65006F4F2C /* DayModel.swift */,
+				19D2C6CB1D82D9E2001F0565 /* MonthSource.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		194E8DC01D7FF51E001B6BC0 /* utility */ = {
+			isa = PBXGroup;
+			children = (
+				194E8DC11D7FF778001B6BC0 /* NSDateExtension.swift */,
+				194E8DC31D81125C001B6BC0 /* LunarDate.swift */,
+				194E8DC51D824A97001B6BC0 /* LunarSolarTerm.swift */,
+			);
+			name = utility;
+			sourceTree = "<group>";
+		};
 		D7A7793A1BFD8ED500DB7B88 = {
 			isa = PBXGroup;
 			children = (
+				19F432CC1D83DCD9001C3DCE /* Foundation.framework */,
 				D7A779451BFD8ED500DB7B88 /* calendar */,
 				D7A7795A1BFD8ED500DB7B88 /* calendarTests */,
 				D7A779651BFD8ED600DB7B88 /* calendarUITests */,
@@ -97,12 +134,17 @@
 		D7A779451BFD8ED500DB7B88 /* calendar */ = {
 			isa = PBXGroup;
 			children = (
+				194E8DC01D7FF51E001B6BC0 /* utility */,
+				194C2D3D1D7D8E32006F4F2C /* model */,
 				D7A779461BFD8ED500DB7B88 /* AppDelegate.swift */,
 				D7A779481BFD8ED500DB7B88 /* ViewController.swift */,
 				D7A7794A1BFD8ED500DB7B88 /* Main.storyboard */,
 				D7A7794D1BFD8ED500DB7B88 /* Assets.xcassets */,
 				D7A7794F1BFD8ED500DB7B88 /* LaunchScreen.storyboard */,
 				D7A779521BFD8ED500DB7B88 /* Info.plist */,
+				19A892BE1D770AF8001C7B9E /* MonthController.swift */,
+				191AF0851D7A847200F794F1 /* CalendarViewController.swift */,
+				191AF0871D7A90E900F794F1 /* DayColletionViewCell.swift */,
 			);
 			path = calendar;
 			sourceTree = "<group>";
@@ -192,6 +234,7 @@
 				TargetAttributes = {
 					D7A779421BFD8ED500DB7B88 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = WVY42TF9RV;
 					};
 					D7A779561BFD8ED500DB7B88 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -255,8 +298,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				194C2D3F1D7D8E65006F4F2C /* DayModel.swift in Sources */,
+				194E8DC21D7FF778001B6BC0 /* NSDateExtension.swift in Sources */,
+				194E8DC61D824A97001B6BC0 /* LunarSolarTerm.swift in Sources */,
+				194E8DC41D81125C001B6BC0 /* LunarDate.swift in Sources */,
+				191AF0861D7A847200F794F1 /* CalendarViewController.swift in Sources */,
+				191AF0881D7A90E900F794F1 /* DayColletionViewCell.swift in Sources */,
+				19A892BF1D770AF8001C7B9E /* MonthController.swift in Sources */,
 				D7A779491BFD8ED500DB7B88 /* ViewController.swift in Sources */,
 				D7A779471BFD8ED500DB7B88 /* AppDelegate.swift in Sources */,
+				19D2C6CC1D82D9E2001F0565 /* MonthSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,10 +449,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = calendar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lsw.calendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -409,10 +463,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = calendar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lsw.calendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

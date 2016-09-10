@@ -50,6 +50,9 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier,forIndexPath:indexPath) 
         cell.textLabel?.text = tableViewSource[indexPath.row]
         cell.imageView?.image = UIImage(named: "img")
+        
+        
+        
         return cell
     }
     
@@ -58,7 +61,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        <#code#>
+        
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
@@ -79,7 +82,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
             
         })
         
-        return [deleteAction, shareAction]
+        return [ shareAction,deleteAction]
     }
 
 }

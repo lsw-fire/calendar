@@ -21,9 +21,74 @@ class calendarTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testMonthSource() {
+        let source = MonthSource(date: NSDate())
+        let result = source.buildOneMonthSource(NSDate(year: 2017,month: 1,day: 5))
+        print(result)
+    }
+    
+    func testMinDate() {
+//        let c = NSDate()
+//        let mDate = LunarDate(date: c)
+//        
+//        let dateFormatter = NSDateFormatter()
+//        let dateAsString = "17-02-1616 00:00"
+//        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        //var newDate = dateFormatter.dateFromString(dateAsString)
+        
+        //let str = dateFormatter.stringFromDate(mDate)
+        //XCTAssert(str == dateAsString)
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testDayOfWeek() {
+        let date = NSDate(year: 2016,month: 9,day: 9)
+        print(date.dayOfWeek)
+        
+        XCTAssert(date.dayOfWeek == 6)
+    }
+    
+    func testNSDateInitializer() {
+        
+        let c = NSDate(year: 1982,month: 12,day: 16)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let str = dateFormatter.stringFromDate(c)
+        
+        var lunarDate = LunarDate(date: c)
+       
+       
+        do
+        {
+        var lunar = LunarDate(1982,11,2,false)
+            
+            //var de = try LunarDate(1982,11,2,false)
+            let s = try dateFormatter.stringFromDate(lunar.getDate())
+            
+            print(s)
+            
+            
+            print(lunar.lunarYearText)
+            print(lunar.lunarMonthText)
+            print(lunar.lunarDayText)
+            
+            let testDate = NSDate(year: 1982,month: 12,day: 16, hour: 6, min: 5)
+            
+            let st = LunarSolarTerm(date: testDate)
+            
+            print(st.getEraYearText())
+            print(st.getEraMonthText())
+            print(st.getEraDayText())
+            print(st.getEraHourText())
+            
+        }
+        catch
+        {
+            
+        }
+        //XCTAssert(str == "01-01-2001")
+
     }
     
     func testPerformanceExample() {
