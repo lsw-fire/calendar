@@ -400,11 +400,15 @@ class LunarDate :NSObject{
     
     private let lunarMonthTextArray : [String] = ["正","二","三","四","五","六","七","八","九","十","十一","腊"]
     
+    func getLunarMonthTextByValue(value:Int) -> String {
+        return lunarMonthTextArray[value-1]
+    }
+    
     var lunarMonthText : String
         {
         get
         {
-            return lunarMonthTextArray[lunarMonth-1]
+            return getLunarMonthTextByValue(lunarMonth)
         }
     }
     

@@ -15,4 +15,5 @@ class DayColletionViewCell: UICollectionViewCell {
     @IBOutlet var lbSixtyDay: UILabel!
     
     @IBOutlet var lbLunaryDay: UILabel!
+    
 }

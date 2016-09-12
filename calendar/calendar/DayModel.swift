@@ -12,7 +12,7 @@ struct DayModel {
     
     var day:Int
     var lunarDay: String
-    var eraDay: String
+    var eraDay: (c: String, t: String)
     var formatDate: String
     var isCurrentMonth: Bool
     var isToday: Bool
@@ -27,5 +27,8 @@ struct DayModel {
         }
     }
     var solarTermText: String!
-
+    
+    mutating func setIsSelected(isSelected:Bool) {
+        self.isSelected = isSelected
+    }
 }

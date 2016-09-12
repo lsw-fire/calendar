@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qeP-6C-whW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="W4s-rT-aRW">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -85,6 +85,65 @@
             </objects>
             <point key="canvasLocation" x="918.75" y="340.14084507042253"/>
         </scene>
+        <!--Date Select Controller-->
+        <scene sceneID="0eI-OD-Uzw">
+            <objects>
+                <viewController storyboardIdentifier="DateSelectController" id="mBc-ao-Mqx" customClass="DateSelectController" customModule="calendar" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vVh-Sv-8G9"/>
+                        <viewControllerLayoutGuide type="bottom" id="hjC-X6-RK6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5WN-B0-mWm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="NAr-3y-J8F" userLabel="Date Picker Time">
+                                <rect key="frame" x="111" y="384" width="378" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="495373721.37546098">
+                                    <!--2016-09-12 11:48:41 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="datePickerTimeSelect:" destination="mBc-ao-Mqx" eventType="valueChanged" id="iS7-Us-soN"/>
+                                </connections>
+                            </datePicker>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="0Cd-zJ-Ymu">
+                                <rect key="frame" x="30" y="168" width="540" height="216"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="eQa-if-W18"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="495343327.832968">
+                                    <!--2016-09-12 03:22:07 +0000-->
+                                </date>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="eQa-if-W18"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="dataPickerSelect:" destination="mBc-ao-Mqx" eventType="valueChanged" id="qI8-rp-58X"/>
+                                </connections>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0Cd-zJ-Ymu" firstAttribute="centerX" secondItem="5WN-B0-mWm" secondAttribute="centerX" id="2JK-MB-14o"/>
+                            <constraint firstItem="NAr-3y-J8F" firstAttribute="centerX" secondItem="5WN-B0-mWm" secondAttribute="centerX" id="2vH-Kn-xhz"/>
+                            <constraint firstItem="0Cd-zJ-Ymu" firstAttribute="width" secondItem="5WN-B0-mWm" secondAttribute="width" multiplier="0.9" id="JNa-ZC-qoT"/>
+                            <constraint firstItem="NAr-3y-J8F" firstAttribute="top" secondItem="0Cd-zJ-Ymu" secondAttribute="bottom" id="TsE-Ng-nJh"/>
+                            <constraint firstItem="NAr-3y-J8F" firstAttribute="width" secondItem="0Cd-zJ-Ymu" secondAttribute="width" multiplier="0.7" id="bWZ-AX-AVF"/>
+                            <constraint firstItem="hjC-X6-RK6" firstAttribute="top" secondItem="NAr-3y-J8F" secondAttribute="bottom" id="nwG-5l-ROE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="prO-sR-GlV"/>
+                    <connections>
+                        <outlet property="datePicker" destination="0Cd-zJ-Ymu" id="Ccz-6M-BQD"/>
+                        <outlet property="timePicker" destination="NAr-3y-J8F" id="fkx-gv-jV9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ur0-km-okm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1249" y="1215"/>
+        </scene>
         <!--Calendar View Controller-->
         <scene sceneID="0SK-ta-k8w">
             <objects>
@@ -97,8 +156,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016年12月16日 20:15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="J8z-ya-Aki">
+                                <rect key="frame" x="20" y="40" width="560" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="210" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rbm-7j-Ka0">
-                                <rect key="frame" x="10" y="100.5" width="580" height="300"/>
+                                <rect key="frame" x="10" y="105" width="580" height="300"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CeO-wR-vfK">
                                     <size key="itemSize" width="123" height="99"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -119,15 +184,15 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="初二" textAlignment="center" lineBreakMode="clip" numberOfLines="2" translatesAutoresizingMaskIntoConstraints="NO" id="LQM-Rw-7bT">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="初二" textAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="LQM-Rw-7bT">
                                                     <rect key="frame" x="0.0" y="60" width="74" height="39"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="甲  子" textAlignment="center" lineBreakMode="clip" numberOfLines="2" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IBr-M6-5wL">
-                                                    <rect key="frame" x="74" y="0.0" width="49" height="60"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="甲  子" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="none" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="IBr-M6-5wL">
+                                                    <rect key="frame" x="74" y="0.0" width="49" height="72"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -137,7 +202,7 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="LQM-Rw-7bT" secondAttribute="bottom" id="20H-Aa-u4H"/>
                                             <constraint firstItem="PmC-vy-nBK" firstAttribute="centerY" secondItem="B2W-vt-9rb" secondAttribute="centerY" multiplier="0.6" id="2Gi-tn-nCq"/>
-                                            <constraint firstItem="IBr-M6-5wL" firstAttribute="bottom" secondItem="PmC-vy-nBK" secondAttribute="bottom" id="E8z-Jy-BcO"/>
+                                            <constraint firstItem="IBr-M6-5wL" firstAttribute="bottom" secondItem="PmC-vy-nBK" secondAttribute="bottom" multiplier="1.2" id="E8z-Jy-BcO"/>
                                             <constraint firstItem="IBr-M6-5wL" firstAttribute="leading" secondItem="PmC-vy-nBK" secondAttribute="trailing" id="Mjv-J4-VrU"/>
                                             <constraint firstItem="LQM-Rw-7bT" firstAttribute="leading" secondItem="PmC-vy-nBK" secondAttribute="leading" id="V0X-OA-ogR"/>
                                             <constraint firstAttribute="trailing" secondItem="IBr-M6-5wL" secondAttribute="trailing" id="XAR-Ap-qoj"/>
@@ -156,14 +221,8 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016年12月16日 20:15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8z-ya-Aki">
-                                <rect key="frame" x="20" y="36" width="560" height="32"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kF6-Yf-vHi" userLabel="CvHeader">
-                                <rect key="frame" x="10" y="73" width="580" height="22.5"/>
+                                <rect key="frame" x="10" y="78" width="580" height="22.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -177,11 +236,12 @@
                             <constraint firstItem="Rbm-7j-Ka0" firstAttribute="top" secondItem="kF6-Yf-vHi" secondAttribute="bottom" constant="5" id="NaW-9p-Uw4"/>
                             <constraint firstItem="Rbm-7j-Ka0" firstAttribute="leading" secondItem="Nyl-aN-agl" secondAttribute="leading" constant="10" id="NkN-gx-0EG"/>
                             <constraint firstItem="kF6-Yf-vHi" firstAttribute="leading" secondItem="Rbm-7j-Ka0" secondAttribute="leading" id="XuG-OB-BRY"/>
-                            <constraint firstItem="J8z-ya-Aki" firstAttribute="top" secondItem="HbU-cG-GQB" secondAttribute="bottom" constant="16" id="YpU-OH-bBL"/>
-                            <constraint firstItem="kF6-Yf-vHi" firstAttribute="top" secondItem="J8z-ya-Aki" secondAttribute="bottom" constant="5" id="hhI-1W-WXo"/>
+                            <constraint firstItem="J8z-ya-Aki" firstAttribute="top" secondItem="Nyl-aN-agl" secondAttribute="top" constant="40" id="Yba-Hr-fjR"/>
+                            <constraint firstItem="kF6-Yf-vHi" firstAttribute="top" secondItem="J8z-ya-Aki" secondAttribute="bottom" constant="6" id="hhI-1W-WXo"/>
                             <constraint firstItem="kF6-Yf-vHi" firstAttribute="height" secondItem="J8z-ya-Aki" secondAttribute="height" multiplier="0.7" id="k4E-zE-1IO"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Oy3-fl-9To"/>
                     <connections>
                         <outlet property="cv" destination="Rbm-7j-Ka0" id="v5e-sy-3wU"/>
                         <outlet property="cvHeader" destination="kF6-Yf-vHi" id="T55-8A-Xca"/>
@@ -190,7 +250,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XXi-Lo-03X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="152" y="894"/>
+            <point key="canvasLocation" x="65" y="679"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2JI-47-z3b">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="W4s-rT-aRW" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S0G-28-hHR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qeP-6C-whW" kind="relationship" relationship="rootViewController" id="EMl-aM-scX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bLc-fw-9HH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-442" y="1579"/>
         </scene>
     </scenes>
 </document>

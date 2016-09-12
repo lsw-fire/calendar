@@ -11,7 +11,11 @@ import UIKit
 
 class MonthSource: NSObject {
     
-    private var initialDate : NSDate
+    private var today : NSDate
+    
+    private let currentDay : Int
+    private let currentMonth : Int
+    private let currentYear : Int
     
     lazy var calendar : NSCalendar = {
         
@@ -23,9 +27,12 @@ class MonthSource: NSObject {
     }()
     
     
-    init(date: NSDate) {
+    override init() {
         
-        initialDate = date
+        today = NSDate()
+        currentDay = today.day
+        currentYear = today.year
+        currentMonth = today.month
         
         super.init()
     }
@@ -33,8 +40,10 @@ class MonthSource: NSObject {
     func buildOneMonthSource(date: NSDate) -> Array<DayModel!> {
         var source = Array<DayModel!>()
         
-        let currentDay = date.day
-        let firstDate = NSDate(year: date.year, month: date.month, day: 1)
+        let initialDay = date.day
+        let initialYear = date.year
+        let initialMonth = date.month
+        let firstDate = NSDate(year: initialYear, month: initialMonth, day: 1)
         let firstLunarDate = LunarDate(date: firstDate)
         
         //本月阳历1号所在的阴历月是几号，本月1号所在的阴历月一共多少天
@@ -80,6 +89,7 @@ class MonthSource: NSObject {
         
         //阳历一号的农历日期索引
         var lunarIndex = firstLunarDate.lunarDay
+        var lunarMonthIndex = firstLunarDate.lunarMonth
         
         var lunarNextMonthDate : LunarDate!
         
@@ -111,14 +121,18 @@ class MonthSource: NSObject {
                     
                     //从新从初一开始新的农历月索引
                     lunarIndex = lunarNextMonthDate.lunarDay
-                    
+                    lunarMonthIndex = lunarNextMonthDate.lunarMonth
                 }
 
                 
                 let eraTextTuple = firstEraDayIn42.getEraText(eraIndex)
-                let eraText = eraTextTuple.c + eraTextTuple.t
                 
-                let lunarDayText = firstLunarDate.getLunarDayTextByValue(lunarIndex)
+                var lunarDayText = firstLunarDate.getLunarDayTextByValue(lunarIndex)
+                if lunarDayText == "初一" {
+                    //十一月显示有点问题因为是三个字，其他月份都是两个字
+                    lunarDayText = firstLunarDate.getLunarMonthTextByValue(lunarMonthIndex) + "月"
+                }
+                
                 lunarIndex += 1
                 
                 var formatDate = String(firstDate.year)
@@ -127,17 +141,24 @@ class MonthSource: NSObject {
                     formatDate += "-"
                     formatDate += String(dayNum)
                 
-                let isToday = dayNum == currentDay
+                let isCurrentMonth = currentMonth == initialMonth
+                
+                let isSelectedDay = dayNum == initialDay
                 
                 var solarTermText = ""
                 if dicSolarTerm.keys.contains(formatDate) {
                     solarTermText = dicSolarTerm[formatDate]!
                 }
                 
-                source.append(DayModel(day: dayNum, lunarDay: lunarDayText, eraDay : eraText, formatDate: formatDate,
-                    isCurrentMonth : true,
+                var isToday = false
+                if isCurrentMonth && currentYear == initialYear && currentDay == dayNum{
+                    isToday = true
+                }
+                
+                source.append(DayModel(day: dayNum, lunarDay: lunarDayText, eraDay : (c: eraTextTuple.c, t: eraTextTuple.t), formatDate: formatDate,
+                    isCurrentMonth : isCurrentMonth,
                     isToday : isToday,
-                    isSelected : false,
+                    isSelected : isSelectedDay,
                     solarTermText : solarTermText))
             }else
             {
