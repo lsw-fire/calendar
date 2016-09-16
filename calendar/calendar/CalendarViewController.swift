@@ -107,15 +107,13 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         print(fromInterfaceOrientation.isLandscape)
         if fromInterfaceOrientation.isPortrait {
-            cvHeightConstraint.constant = 60
-            selectDateTopConstraint.constant = 20
+            
+            //selectDateTopConstraint.constant = 10
         }
         else
         {
-            cvHeightConstraint.constant = 0
-            selectDateTopConstraint.constant = 40
+            //selectDateTopConstraint.constant = 30
         }
-        //reloadView()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -156,6 +154,19 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     
     func reloadView() {
         
+        let size = UIScreen.mainScreen().bounds
+        
+        var isPortrait = true
+        if size.height < size.width {
+            isPortrait = false
+        }
+        
+        if isPortrait {
+            selectDateTopConstraint.constant = 30
+        }
+        else {
+            selectDateTopConstraint.constant = 10
+        }
         
         source = getSource(currentMonthDate)
         
@@ -165,10 +176,12 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
-        let size = UIScreen.mainScreen().bounds
+        
         //在这给每一个item cell设置大小，因为在viewDidLoad方法时还得不到整体viewcollection的size，得到的是默认在stoarybord里的那个尺寸
-        let itemWidth = (size.width-20) / CGFloat(7)
+        
+        let itemWidth = cv.frame.size.width / CGFloat(7)
         layout.itemSize = CGSizeMake(itemWidth, cv.frame.size.height / CGFloat(6))
+        //layout.itemSize = CGSizeMake(itemWidth, itemWidth * CGFloat(6))
         
         cv.collectionViewLayout = layout
         cv.pagingEnabled = true
@@ -189,15 +202,18 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             
             label.text = cvHeaderTitle[i-1]
             label.textColor = UIColor.whiteColor()
+            //label.backgroundColor = UIColor.redColor()
+            
             label.textAlignment = NSTextAlignment.Center
             cvHeader.addSubview(label)
+            
             cvHeader.backgroundColor = UIColor.redColor()
             x = itemWidth * CGFloat(i)
         }
         
         let layer = CALayer()
-        let height = cv.frame.size.height + (cv.frame.origin.y - cvHeader.frame.origin.y) + 5
-        let width = cvHeader.frame.size.width
+        let height = cv.frame.size.height + cvHeader.frame.size.height + 8
+        let width = cv.frame.size.width+10
         layer.frame = CGRectMake(CGFloat(0), CGFloat(0), width, height)
         layer.borderColor = UIColor.redColor().CGColor
         layer.borderWidth = 1
@@ -271,6 +287,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
                 //当前月的日期选中
                 cell.lbDay.textColor = UIColor.whiteColor()
                 cell.lbDay.backgroundColor = UIColor.lightGrayColor()
+                //cell.lbDay.layer.cornerRadius = 5
                 
                 currentSelectedDayCell = cell
             }
@@ -292,7 +309,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     }
     
     @IBOutlet weak var selectDateTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var cvHeightConstraint: NSLayoutConstraint!
+   
     
     var currentSelectedDayCell: DayColletionViewCell! = nil
     var currentTodayCell: DayColletionViewCell! = nil
@@ -315,6 +332,8 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         
         if let model = source[indexPath.row  + beginIndex] {
             cell.lbDay.text = String(model.day)
+          
+            
             cell.lbSixtyDay.attributedText = ColorText.getColorEraText(model.eraDay.c, terrestial: model.eraDay.t);        if model.isSolarTerm
             {
                 cell.lbLunaryDay.text = model.solarTermText
@@ -349,7 +368,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             else
             {
                 cell.lbDay.backgroundColor = UIColor.whiteColor()
-                cell.lbDay.textColor = UIColor.blackColor()
+                cell.lbDay.textColor = UIColor.darkGrayColor()
             }
             
         }
