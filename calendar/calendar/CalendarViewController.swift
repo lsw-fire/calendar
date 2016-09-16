@@ -17,7 +17,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     @IBOutlet var cvHeader: UIView!
     @IBOutlet var lbSelectedDateTime: UILabel!
     
-    @IBAction func lbSelectedDateTimeClick(sender:AnyObject)
+    func goToDateSelectController()
     {
         let strDate = lbSelectedDateTime.text
         let formatter = NSDateFormatter()
@@ -39,6 +39,19 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     
     //var dayModel = DayModel(day: "2")
     
+    var outOfLabel = false
+    
+    @IBOutlet weak var lbCYear: UILabel!
+    @IBOutlet weak var lbCMonth: UILabel!
+    @IBOutlet weak var lbCDay: UILabel!
+    @IBOutlet weak var lbCTime: UILabel!
+    
+    @IBOutlet weak var lbTYear: UILabel!
+    @IBOutlet weak var lbTMonth: UILabel!
+    @IBOutlet weak var lbTDay: UILabel!
+    @IBOutlet weak var lbTTime: UILabel!
+    
+    @IBOutlet weak var svTitle: UIStackView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,15 +59,63 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         cv.delegate = self;
         cv.backgroundColor = UIColor.whiteColor()
         
-        let selectDateTimeTap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CalendarViewController.lbSelectedDateTimeClick(_:)))
+        //给控件增加手势要打开这一项
         lbSelectedDateTime.userInteractionEnabled = true
-        lbSelectedDateTime.addGestureRecognizer(selectDateTimeTap)
+        
+        let gesture = LabelTapGestureRecognizer(target: self)
+        
+        gesture.onTouch = { touch in
+            self.outOfLabel = false
+            self.lbSelectedDateTime.backgroundColor = UIColor.lightGrayColor()
+            self.lbSelectedDateTime.textColor = UIColor.whiteColor()
+        }
+        gesture.onEnded = { touch in
+            self.lbSelectedDateTime.backgroundColor = UIColor.whiteColor()
+            self.lbSelectedDateTime.textColor = UIColor.blackColor()
+            if !self.outOfLabel {
+                self.goToDateSelectController()
+            }
+        }
+        gesture.onMoved = { touch in
+            let _transX =  touch.locationInView(self.lbSelectedDateTime).x
+            let _transY =  touch.locationInView(self.lbSelectedDateTime).y
+            
+            let rect = self.lbSelectedDateTime.bounds
+            
+            if _transX < 0 || _transX > rect.width {
+                self.lbSelectedDateTime.backgroundColor = UIColor.whiteColor()
+                self.lbSelectedDateTime.textColor = UIColor.blackColor()
+                self.outOfLabel = true
+            }
+            
+            if _transY < 0 || _transY > rect.height {
+                self.lbSelectedDateTime.backgroundColor = UIColor.whiteColor()
+                self.lbSelectedDateTime.textColor = UIColor.blackColor()
+                self.outOfLabel = true
+            }
+
+        }
+        lbSelectedDateTime.addGestureRecognizer(gesture)
         
         loadTitle()
         lbSelectedDateTime.layer.borderColor = UIColor.lightGrayColor().CGColor
         lbSelectedDateTime.layer.borderWidth = 1
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        print(fromInterfaceOrientation.isLandscape)
+        if fromInterfaceOrientation.isPortrait {
+            cvHeightConstraint.constant = 60
+            selectDateTopConstraint.constant = 20
+        }
+        else
+        {
+            cvHeightConstraint.constant = 0
+            selectDateTopConstraint.constant = 40
+        }
+        //reloadView()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,13 +132,30 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     
     func loadTitle()  {
         lbSelectedDateTime.text = currentMonthDate.toFormatString(dateFormat)
+        let lunarST = LunarSolarTerm(date: currentMonthDate)
+        let eraY = lunarST.getEraYearText()
+        let eraM = lunarST.getEraMonthText()
+        let eraD = lunarST.getEraDayText()
+        let eraT = lunarST.getEraHourText()
+        
+        lbCYear.attributedText = ColorText.getColorEraText(eraY.c, terrestial: "")
+        lbTYear.attributedText = ColorText.getColorEraText("", terrestial: eraY.t)
+        
+        lbCMonth.attributedText = ColorText.getColorEraText(eraM.c, terrestial: "")
+        lbTMonth.attributedText = ColorText.getColorEraText("", terrestial: eraM.t)
+        
+        lbCDay.attributedText = ColorText.getColorEraText(eraD.c, terrestial: "")
+        lbTDay.attributedText = ColorText.getColorEraText("", terrestial: eraD.t)
+        
+        lbCTime.attributedText = ColorText.getColorEraText(eraT.c, terrestial: "")
+        lbTTime.attributedText = ColorText.getColorEraText("", terrestial: eraT.t)
+        
     }
     
     var currentMonthDate : NSDate = NSDate()
     
-    override func viewDidLayoutSubviews() {
+    func reloadView() {
         
-        super.viewDidLayoutSubviews()
         
         source = getSource(currentMonthDate)
         
@@ -102,7 +180,8 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         // cv.contentOffset.x = cv.frame.size.width
         
         //        NSLog("height=%f", cv.frame.size.height)
-        
+        cvHeader.layer.sublayers = nil
+        //cvHeader.subviews.map{ $0.removeFromSuperview()}
         let cvHeaderTitle :[String] = ["日","一","二","三","四","五","六"]
         var x = CGFloat(0);
         for i in 1...7 {
@@ -116,36 +195,25 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             x = itemWidth * CGFloat(i)
         }
         
-        let borderHeight = cv.frame.size.height;
-        let border1 = createLayerBottomBorder(1)
-        cv.layer.addSublayer(border1)
-        let border2 = createLayerBottomBorder(borderHeight-1)
-        cv.layer.addSublayer(border2)
-        let border3 = createLayerBottomBorder(borderHeight+1)
-        cv.layer.addSublayer(border3)
-        let border4 = createLayerBottomBorder(borderHeight*2-1)
-        cv.layer.addSublayer(border4)
-        let border5 = createLayerBottomBorder(borderHeight*2+1)
-        cv.layer.addSublayer(border5)
-        let border6 = createLayerBottomBorder(borderHeight*3-1)
-        cv.layer.addSublayer(border6)
+        let layer = CALayer()
+        let height = cv.frame.size.height + (cv.frame.origin.y - cvHeader.frame.origin.y) + 5
+        let width = cvHeader.frame.size.width
+        layer.frame = CGRectMake(CGFloat(0), CGFloat(0), width, height)
+        layer.borderColor = UIColor.redColor().CGColor
+        layer.borderWidth = 1
+        
+        cvHeader.layer.addSublayer(layer)
+
+        
     }
     
-    func createLayerBottomBorder(height:CGFloat) -> CALayer {
-        let layer2 = CALayer()
-        let widthLayer2 = cv.frame.size.width
-        layer2.frame = CGRectMake(CGFloat(0), height, widthLayer2, CGFloat(1))
-        layer2.backgroundColor = UIColor.orangeColor().CGColor
+    override func viewDidLayoutSubviews() {
         
-        return layer2
-    }
-    func createLayerRightBorder(width:CGFloat) -> CALayer {
-        let layer2 = CALayer()
-        let height = cv.frame.size.height
-        layer2.frame = CGRectMake(width,CGFloat(1),CGFloat(1), height)
-        layer2.backgroundColor = UIColor.orangeColor().CGColor
+        super.viewDidLayoutSubviews()
         
-        return layer2
+        
+        reloadView()
+       
     }
     
     
@@ -223,12 +291,17 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         }
     }
     
+    @IBOutlet weak var selectDateTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var cvHeightConstraint: NSLayoutConstraint!
+    
     var currentSelectedDayCell: DayColletionViewCell! = nil
     var currentTodayCell: DayColletionViewCell! = nil
     //每个UICollectionView展示的内容
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell: DayColletionViewCell  = collectionView.dequeueReusableCellWithReuseIdentifier("defaultCell", forIndexPath: indexPath) as! DayColletionViewCell
+        
+        cell.backgroundColor = UIColor.whiteColor()
         
         let beginIndex = indexPath.section == 0 ? 0 : (42 * indexPath.section)
 //        
@@ -343,59 +416,3 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     
 }
 
-class MonthViewLayout: UICollectionViewFlowLayout {
-    
-    
-    
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        
-        return super.layoutAttributesForElementsInRect(rect)?.map
-            {
-                attrs in
-                let attrscp = attrs.copy() as! UICollectionViewLayoutAttributes
-                self.applyLayoutAttributes(attrscp)
-                return attrscp
-        }
-        
-    }
-    
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
-        
-        if let attrs = super.layoutAttributesForItemAtIndexPath(indexPath)
-        {
-            let attrscp = attrs.copy() as! UICollectionViewLayoutAttributes
-            self.applyLayoutAttributes(attrscp)
-            return attrscp
-        }
-        return nil
-        
-    }
-    
-    
-    func applyLayoutAttributes(attributes : UICollectionViewLayoutAttributes) {
-        
-        if attributes.representedElementKind != nil {
-            return
-        }
-        
-        if let collectionView = self.collectionView {
-            
-            let stride = (self.scrollDirection == .Horizontal) ? collectionView.frame.size.width : collectionView.frame.size.height
-            
-            let offset = CGFloat(attributes.indexPath.section) * stride
-            
-            var xCellOffset : CGFloat = CGFloat(attributes.indexPath.item % 7) * self.itemSize.width
-            
-            var yCellOffset : CGFloat = CGFloat(attributes.indexPath.item / 7) * self.itemSize.height
-            
-            if(self.scrollDirection == .Horizontal) {
-                xCellOffset += offset;
-            } else {
-                yCellOffset += offset
-            }
-            
-            attributes.frame = CGRectMake(xCellOffset, yCellOffset, self.itemSize.width, self.itemSize.height)
-        }
-        
-    }
-}

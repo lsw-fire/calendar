@@ -20,6 +20,8 @@ class ColorText: NSObject {
             listString.appendAttributedString(dicColorString[celestial]!)
         }
         else{
+            if !celestial.isEmpty {
+            
             let cColor = ApplicationResource.sharedInstance.getCelestialPropertyBy(celestial)["Color"]
             let cUIColor = ApplicationResource.sharedInstance.colorDictionary[cColor!]
             let cAttribute = [NSForegroundColorAttributeName : cUIColor!]
@@ -27,12 +29,16 @@ class ColorText: NSObject {
             
             listString.appendAttributedString(cString)
             dicColorString[celestial] = cString
+            }
         }
         
         if dicColorString.keys.contains(terrestial) {
             listString.appendAttributedString(dicColorString[terrestial]!)
         }
         else{
+            
+            if !terrestial.isEmpty {
+                
             let tColor = ApplicationResource.sharedInstance.getTerrestialPropertyBy(terrestial)["Color"]
             let tUIColor = ApplicationResource.sharedInstance.colorDictionary[tColor! as! String]
             let tAttribute = [NSForegroundColorAttributeName : tUIColor!]
@@ -40,6 +46,7 @@ class ColorText: NSObject {
             
             listString.appendAttributedString(tString)
             dicColorString[terrestial] = tString
+            }
         }
         return listString
     }
