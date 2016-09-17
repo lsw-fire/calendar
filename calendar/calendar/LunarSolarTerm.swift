@@ -106,7 +106,7 @@ class LunarSolarTerm: LunarDate {
             let dd = Double(term(year, n: i, pd: true))
             let sd1 = antiDayDifferent(year, x: floor(dd))
             let sHour = Int(floor(tail(dd)*24))
-            let sMin = Int(floor(tail(dd)*24 - Double(sHour))*60)
+            let sMin = Int(floor((tail(dd)*24 - Double(sHour))*60))
             let sMonth = Int(ceil(Double(i)/2))
             let sDay = Int(sd1%100)
             

@@ -16,6 +16,15 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     @IBOutlet var cv: UICollectionView!
     @IBOutlet var cvHeader: UIView!
     @IBOutlet var lbSelectedDateTime: UILabel!
+    @IBOutlet weak var lbLunarDate: UILabel!
+    @IBOutlet weak var lbSolarTermDate: UILabel!
+    
+    @IBAction func btnToday(sender: AnyObject) {
+        currentMonthDate = NSDate()
+        source = getSource(currentMonthDate)
+        cv.reloadData()
+        loadTitle()
+    }
     
     func goToDateSelectController()
     {
@@ -71,7 +80,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         }
         gesture.onEnded = { touch in
             self.lbSelectedDateTime.backgroundColor = UIColor.whiteColor()
-            self.lbSelectedDateTime.textColor = UIColor.blackColor()
+            self.lbSelectedDateTime.textColor = UIColor.darkGrayColor()
             if !self.outOfLabel {
                 self.goToDateSelectController()
             }
@@ -84,22 +93,22 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             
             if _transX < 0 || _transX > rect.width {
                 self.lbSelectedDateTime.backgroundColor = UIColor.whiteColor()
-                self.lbSelectedDateTime.textColor = UIColor.blackColor()
+                self.lbSelectedDateTime.textColor = UIColor.darkGrayColor()
                 self.outOfLabel = true
             }
             
             if _transY < 0 || _transY > rect.height {
                 self.lbSelectedDateTime.backgroundColor = UIColor.whiteColor()
-                self.lbSelectedDateTime.textColor = UIColor.blackColor()
+                self.lbSelectedDateTime.textColor = UIColor.darkGrayColor()
                 self.outOfLabel = true
             }
-
+            
         }
         lbSelectedDateTime.addGestureRecognizer(gesture)
         
         loadTitle()
-        lbSelectedDateTime.layer.borderColor = UIColor.lightGrayColor().CGColor
-        lbSelectedDateTime.layer.borderWidth = 1
+        //        lbSelectedDateTime.layer.borderColor = UIColor.lightGrayColor().CGColor
+        //        lbSelectedDateTime.layer.borderWidth = 1
         
         // Do any additional setup after loading the view.
     }
@@ -148,6 +157,11 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         lbCTime.attributedText = ColorText.getColorEraText(eraT.c, terrestial: "")
         lbTTime.attributedText = ColorText.getColorEraText("", terrestial: eraT.t)
         
+        let lunarText = lunarST.lunarYearText+"\n"+lunarST.lunarMonthText+"月"+lunarST.lunarDayText
+        lbLunarDate.text = lunarText
+        
+        let solarTerm = lunarST.getSolarTerm(currentMonthDate.year, month: currentMonthDate.month)
+        lbSolarTermDate.text = solarTerm.solarTerm1.name+" : "+solarTerm.solarTerm1.solarTermDate.toFormatString("d日-HH:mm")+"\n"+solarTerm.solarTerm2.name+" : "+solarTerm.solarTerm2.solarTermDate.toFormatString("d日-HH:mm")
     }
     
     var currentMonthDate : NSDate = NSDate()
@@ -207,19 +221,19 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             label.textAlignment = NSTextAlignment.Center
             cvHeader.addSubview(label)
             
-            cvHeader.backgroundColor = UIColor.redColor()
+            cvHeader.backgroundColor = UIColor.orangeColor()
             x = itemWidth * CGFloat(i)
         }
         
         let layer = CALayer()
-        let height = cv.frame.size.height + cvHeader.frame.size.height + 8
+        let height = cv.frame.size.height + cvHeader.frame.size.height + 10
         let width = cv.frame.size.width+10
         layer.frame = CGRectMake(CGFloat(0), CGFloat(0), width, height)
-        layer.borderColor = UIColor.redColor().CGColor
+        layer.borderColor = UIColor.orangeColor().CGColor
         layer.borderWidth = 1
         
         cvHeader.layer.addSublayer(layer)
-
+        
         
     }
     
@@ -229,7 +243,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         
         
         reloadView()
-       
+        
     }
     
     
@@ -269,48 +283,52 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     //选中某一天
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let cell: DayColletionViewCell  = collectionView.cellForItemAtIndexPath(indexPath) as! DayColletionViewCell
-       
-        if cell != currentSelectedDayCell {
+        let beginIndex = indexPath.section == 0 ? 0 : (42 * indexPath.section)
+        
+        if let selected = source[indexPath.row + beginIndex]
+        {
             
-            if let beforeSelectedCell = currentSelectedDayCell {
-                beforeSelectedCell.lbDay.backgroundColor = UIColor.whiteColor()
-                beforeSelectedCell.lbDay.textColor = UIColor.blackColor()
-            }
+            let cell: DayColletionViewCell  = collectionView.cellForItemAtIndexPath(indexPath) as! DayColletionViewCell
             
-            let beginIndex = indexPath.section == 0 ? 0 : (42 * indexPath.section)
-            
-            let selected = source[indexPath.row + beginIndex]
-            
-            if cell != currentTodayCell {
+            if cell != currentSelectedDayCell {
                 
-                //当前月的日期选中
-                cell.lbDay.textColor = UIColor.whiteColor()
-                cell.lbDay.backgroundColor = UIColor.lightGrayColor()
-                //cell.lbDay.layer.cornerRadius = 5
+                if let beforeSelectedCell = currentSelectedDayCell {
+                    beforeSelectedCell.lbDay.backgroundColor = UIColor.whiteColor()
+                    beforeSelectedCell.lbDay.textColor = dayTextColorNormal
+                }
                 
-                currentSelectedDayCell = cell
+                
+                
+                if cell != currentTodayCell {
+                    
+                    //当前月的日期选中
+                    cell.lbDay.textColor = UIColor.whiteColor()
+                    cell.lbDay.backgroundColor = UIColor.lightGrayColor()
+                    //cell.lbDay.layer.cornerRadius = 5
+                    
+                    currentSelectedDayCell = cell
+                }
+                else
+                {
+                    currentSelectedDayCell = nil
+                }
+                
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = dateFormatFromCell
+                let currentTime = currentMonthDate.toFormatString(" HH:mm")
+                
+                let date = formatter.dateFromString(selected.formatDate + " " + currentTime)
+                
+                currentMonthDate = date!
+                
+                loadTitle()
             }
-            else
-            {
-                currentSelectedDayCell = nil
-            }
-            
-            let formatter = NSDateFormatter()
-            formatter.dateFormat = dateFormatFromCell
-            let currentTime = currentMonthDate.toFormatString(" HH:mm")
-            
-            let date = formatter.dateFromString(selected.formatDate + " " + currentTime)
-            
-            currentMonthDate = date!
-            
-            loadTitle()
         }
     }
     
     @IBOutlet weak var selectDateTopConstraint: NSLayoutConstraint!
-   
     
+    let dayTextColorNormal = UIColor.blackColor()
     var currentSelectedDayCell: DayColletionViewCell! = nil
     var currentTodayCell: DayColletionViewCell! = nil
     //每个UICollectionView展示的内容
@@ -321,18 +339,18 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         cell.backgroundColor = UIColor.whiteColor()
         
         let beginIndex = indexPath.section == 0 ? 0 : (42 * indexPath.section)
-//        
-//        let currentRow = indexPath.item/7
-//        if currentRow < 5 {
-//            cell.layer.addSublayer(createLayerBottomBorder(cell.frame.size.height-1))
-//
+        //
+        //        let currentRow = indexPath.item/7
+        //        if currentRow < 5 {
+        //            cell.layer.addSublayer(createLayerBottomBorder(cell.frame.size.height-1))
+        //
         
         cell.lbDay.backgroundColor = UIColor.whiteColor()
         let selectedDay = currentMonthDate.day
         
         if let model = source[indexPath.row  + beginIndex] {
             cell.lbDay.text = String(model.day)
-          
+            
             
             cell.lbSixtyDay.attributedText = ColorText.getColorEraText(model.eraDay.c, terrestial: model.eraDay.t);        if model.isSolarTerm
             {
@@ -356,19 +374,19 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
                 
                 cell.lbDay.textColor = UIColor.whiteColor()
                 cell.lbDay.backgroundColor = UIColor.orangeColor()
-                 print(cell.lbDay.text)
+                print(cell.lbDay.text)
             }
             else if(model.isSelected && !model.isToday && selectedDay == model.day)
             {
                 currentSelectedDayCell = cell
                 cell.lbDay.textColor = UIColor.whiteColor()
-                cell.lbDay.backgroundColor = UIColor.lightGrayColor()
+                cell.lbDay.backgroundColor = dayTextColorNormal
                 //print(cell.lbDay.text)
             }
             else
             {
                 cell.lbDay.backgroundColor = UIColor.whiteColor()
-                cell.lbDay.textColor = UIColor.darkGrayColor()
+                cell.lbDay.textColor = dayTextColorNormal
             }
             
         }
