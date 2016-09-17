@@ -26,6 +26,9 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         loadTitle()
     }
     
+    let rotateDirection = ApplicationResource.sharedInstance.getMonthViewRotateDirection()
+    
+    
     func goToDateSelectController()
     {
         let strDate = lbSelectedDateTime.text
@@ -185,7 +188,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         source = getSource(currentMonthDate)
         
         let layout = MonthViewLayout()
-        layout.scrollDirection = .Vertical
+        layout.scrollDirection = rotateDirection
         //layout.scrollDirection = .Horizontal
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
@@ -203,8 +206,15 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         cv.showsVerticalScrollIndicator = false
         
         //初始化第几页
-        cv.contentOffset.y = cv.frame.size.height
-        // cv.contentOffset.x = cv.frame.size.width
+        if rotateDirection == .Horizontal {
+            cv.contentOffset.x = cv.frame.size.width
+        }
+        else
+        {
+            cv.contentOffset.y = cv.frame.size.height
+        }
+        
+        //
         
         //        NSLog("height=%f", cv.frame.size.height)
         cvHeader.layer.sublayers = nil
@@ -380,7 +390,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             {
                 currentSelectedDayCell = cell
                 cell.lbDay.textColor = UIColor.whiteColor()
-                cell.lbDay.backgroundColor = dayTextColorNormal
+                cell.lbDay.backgroundColor = UIColor.lightGrayColor()
                 //print(cell.lbDay.text)
             }
             else
@@ -419,8 +429,11 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         
         let cvbounds = self.cv.bounds
         
-        //var page : Int = Int(floor(self.cv.contentOffset.x / cvbounds.size.width))
-        var page : Int = Int(floor(self.cv.contentOffset.y / cvbounds.size.height))
+        var page = Int(floor(self.cv.contentOffset.x / cvbounds.size.width))
+        if rotateDirection != .Horizontal
+        {
+            page = Int(floor(self.cv.contentOffset.y / cvbounds.size.height))
+        }
         
         page = page > 0 ? page : 0
         
@@ -436,9 +449,13 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             cv.reloadData()
             loadTitle()
         }
-        cv.contentOffset.y = cv.frame.size.height
-        //cv.contentOffset.x = cv.frame.size.width
-        
+        if rotateDirection == .Horizontal {
+            cv.contentOffset.x = cv.frame.size.width
+        }
+        else
+        {
+            cv.contentOffset.y = cv.frame.size.height
+        }
     }
     
     /*

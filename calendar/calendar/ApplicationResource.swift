@@ -20,6 +20,8 @@ class ApplicationResource: NSObject {
     
     override init() {
         
+        super.init()
+        
         let bundle : NSBundle = NSBundle.mainBundle()
         let jsonPath = bundle.pathForResource("Source.json", ofType: nil)
         let jsonData = NSData.init(contentsOfFile: jsonPath!)
@@ -32,6 +34,7 @@ class ApplicationResource: NSObject {
             print(error.localizedDescription)
         }
 
+        self.setMonthViewRotateDirection(UICollectionViewScrollDirection.Vertical)
     }
     
     var celestialStem : Dictionary<String,AnyObject>
@@ -63,4 +66,15 @@ class ApplicationResource: NSObject {
             "Green":UIColor(red: 34/255, green: 193/255, blue: 34/255, alpha: 1),
             "Blue":UIColor.blueColor()
     ]
+    
+    //user defaults
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let viewRotateDirection = "viewRotateDirection"
+    func setMonthViewRotateDirection(direction:UICollectionViewScrollDirection) {
+        userDefaults.setInteger(direction.rawValue, forKey: viewRotateDirection)
+    }
+    
+    func getMonthViewRotateDirection() -> UICollectionViewScrollDirection {
+         return UICollectionViewScrollDirection(rawValue: userDefaults.integerForKey(viewRotateDirection))!
+    }
 }
