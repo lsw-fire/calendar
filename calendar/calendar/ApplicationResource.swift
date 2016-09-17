@@ -33,8 +33,10 @@ class ApplicationResource: NSObject {
         catch let error as NSError {
             print(error.localizedDescription)
         }
-
-        self.setMonthViewRotateDirection(UICollectionViewScrollDirection.Vertical)
+        
+        if !userDefaults.dictionaryRepresentation().keys.contains(viewRotateDirection) {
+             self.setMonthViewRotateDirection(UICollectionViewScrollDirection.Vertical)
+        }
     }
     
     var celestialStem : Dictionary<String,AnyObject>
@@ -72,6 +74,7 @@ class ApplicationResource: NSObject {
     let viewRotateDirection = "viewRotateDirection"
     func setMonthViewRotateDirection(direction:UICollectionViewScrollDirection) {
         userDefaults.setInteger(direction.rawValue, forKey: viewRotateDirection)
+        userDefaults.synchronize()
     }
     
     func getMonthViewRotateDirection() -> UICollectionViewScrollDirection {
