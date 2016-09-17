@@ -16,17 +16,17 @@ class LunarSolarTerm: LunarDate {
     let celestialStemName : String = "癸甲乙丙丁戊己庚辛壬"
     let terrestialBranchName : String = "亥子丑寅卯辰巳午未申酉戌"
     
-    func getCelestialStemText(x:Int) -> String {
+    func getCelestialStemText(_ x:Int) -> String {
         let index = x%10
-        return celestialStemName.substringWithRange(Range<String.Index>(celestialStemName.startIndex.advancedBy(index) ..< celestialStemName.startIndex.advancedBy(index + 1)))
+        return celestialStemName.substring(with: Range<String.Index>(celestialStemName.characters.index(celestialStemName.startIndex, offsetBy: index) ..< celestialStemName.characters.index(celestialStemName.startIndex, offsetBy: index + 1)))
     }
     
-    func getTerrestrialBranchText(x:Int) -> String {
+    func getTerrestrialBranchText(_ x:Int) -> String {
         let index = x%12
-        return terrestialBranchName.substringWithRange(Range<String.Index>(terrestialBranchName.startIndex.advancedBy(index) ..< terrestialBranchName.startIndex.advancedBy(index+1)))
+        return terrestialBranchName.substring(with: Range<String.Index>(terrestialBranchName.characters.index(terrestialBranchName.startIndex, offsetBy: index) ..< terrestialBranchName.characters.index(terrestialBranchName.startIndex, offsetBy: index+1)))
     }
     
-    func getEraText(x:Int) -> (c:String,t:String) {
+    func getEraText(_ x:Int) -> (c:String,t:String) {
         return (getCelestialStemText(x),getTerrestrialBranchText(x))
     }
     
@@ -52,11 +52,11 @@ class LunarSolarTerm: LunarDate {
 
     }
     
-    private var date : NSDate
+    fileprivate var date : Date
     
-    override init(date: NSDate) {
+    override init(paramDate date: Date) {
         self.date = date
-        super.init(date: self.date)
+        super.init(paramDate: self.date)
     }
     
     func getChineseEraOfYear() -> Int {
@@ -95,7 +95,7 @@ class LunarSolarTerm: LunarDate {
         return Int(round(rem(v, w: 60)))
     }
     
-    func getSolarTerm(year:Int, month:Int) -> (solarTerm1 : SolarTerm, solarTerm2: SolarTerm) {
+    func getSolarTerm(_ year:Int, month:Int) -> (solarTerm1 : SolarTerm, solarTerm2: SolarTerm) {
         var solarTermArray = Array<SolarTerm>()
         
         let begin = month * 2 - 1
@@ -108,32 +108,32 @@ class LunarSolarTerm: LunarDate {
             let sHour = Int(floor(tail(dd)*24))
             let sMin = Int(floor((tail(dd)*24 - Double(sHour))*60))
             let sMonth = Int(ceil(Double(i)/2))
-            let sDay = Int(sd1%100)
+            let sDay = Int(sd1.truncatingRemainder(dividingBy: 100))
             
-            let date = NSDate(year:year,month: sMonth,day: sDay, hour: sHour, min: sMin)
+            let date = Date(year:year,month: sMonth,day: sDay, hour: sHour, min: sMin)
             
             let solarTerm = SolarTerm(solarTermDate: date, name: lunarHolidayName[i-1])
             
-            solarTermArray.insert(solarTerm, atIndex: i - month*2 + 1)
+            solarTermArray.insert(solarTerm, at: i - month*2 + 1)
 
         }
         
         return (solarTermArray[0],solarTermArray[1])
     }
     
-    func gan(x:Int) -> Int {
+    func gan(_ x:Int) -> Int {
         return x%10
     }
     
-    func rem(x: Double, w: Double) -> Double {
+    func rem(_ x: Double, w: Double) -> Double {
         return tail(x/w) * w
     }
     
-    func tail(x: Double) -> Double {
+    func tail(_ x: Double) -> Double {
         return x-floor(x)
     }
     
-    func antiDayDifferent(year:Int, x: Double) -> Double {
+    func antiDayDifferent(_ year:Int, x: Double) -> Double {
         var tempX = x
         var m = 1
         for j in 1...12 {
@@ -151,7 +151,7 @@ class LunarSolarTerm: LunarDate {
         return 100 * Double(m) + tempX
     }
     
-    func dayDifferent(year: Int, month: Int, day:Int) -> Int {
+    func dayDifferent(_ year: Int, month: Int, day:Int) -> Int {
         let ifG = ifGregorian(year, month: month, day: day, opt: 1)
         var monthDays : [Int] = [0,31,28,31,30,31,30,31,31,30,31,30,31]
         if ifG == 1 {
@@ -183,7 +183,7 @@ class LunarSolarTerm: LunarDate {
         return v
     }
     
-    func ifGregorian(year: Int, month: Int, day:Int, opt:Int) -> Int {
+    func ifGregorian(_ year: Int, month: Int, day:Int, opt:Int) -> Int {
         if opt == 1
         {
             if year > 1582 || (year == 1582 && month > 10) || (year==1582 && month == 10 && day > 14)
@@ -211,7 +211,7 @@ class LunarSolarTerm: LunarDate {
         return -1
     }
     
-    func term(year:Int, n: Int, pd: Bool) -> Double
+    func term(_ year:Int, n: Int, pd: Bool) -> Double
     {
         let yearMin100 = Double(year) - 100
         let doubleYearMin100 = yearMin100 * yearMin100
@@ -228,7 +228,7 @@ class LunarSolarTerm: LunarDate {
         return vs;
     }
     
-    func equivalentStandardDay(year: Int, month:Int, day:Int) -> Double {
+    func equivalentStandardDay(_ year: Int, month:Int, day:Int) -> Double {
         let doubleYear = Double(year)
         let differentDay = Double(dayDifferent(year, month: month, day: day))
         var v = (doubleYear-1)*365
@@ -244,6 +244,6 @@ class LunarSolarTerm: LunarDate {
 }
 
 struct SolarTerm {
-    var solarTermDate : NSDate
+    var solarTermDate : Date
     var name : String
 }

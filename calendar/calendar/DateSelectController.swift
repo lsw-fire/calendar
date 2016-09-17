@@ -19,21 +19,21 @@ class DateSelectController: UIViewController {
     @IBOutlet weak var timePicker: UIDatePicker!
     
     @IBOutlet weak var niRotateItem: UIBarButtonItem!
-    @IBAction func niRotateDirection(sender: AnyObject) {
-        if ApplicationResource.sharedInstance.getMonthViewRotateDirection() == .Horizontal {
-            ApplicationResource.sharedInstance.setMonthViewRotateDirection(.Vertical)
+    @IBAction func niRotateDirection(_ sender: AnyObject) {
+        if ApplicationResource.sharedInstance.getMonthViewRotateDirection() == .horizontal {
+            ApplicationResource.sharedInstance.setMonthViewRotateDirection(.vertical)
             niRotateItem.title = "纵向"
         }
         else
         {
-            ApplicationResource.sharedInstance.setMonthViewRotateDirection(.Horizontal)
+            ApplicationResource.sharedInstance.setMonthViewRotateDirection(.horizontal)
             niRotateItem.title = "横向"
         }
     }
-    var selectedDate : NSDate!
+    var selectedDate : Date!
     
-    let highLightColorBtn = UIColor.orangeColor()
-    let normalColorBtn = UIColor.darkGrayColor()
+    let highLightColorBtn = UIColor.orange
+    let normalColorBtn = UIColor.darkGray
     
     let dateFormat = "yyyy年M月d日"
     let timeFormat = "HH:mm"
@@ -41,7 +41,7 @@ class DateSelectController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        if ApplicationResource.sharedInstance.getMonthViewRotateDirection() == .Horizontal {
+        if ApplicationResource.sharedInstance.getMonthViewRotateDirection() == .horizontal {
             niRotateItem.title = "横向"
         }
         else
@@ -50,24 +50,24 @@ class DateSelectController: UIViewController {
         }
         
         
-        let nsLocal = NSLocale.init(localeIdentifier: "zh_CN")
+        let nsLocal = Locale.init(identifier: "zh_CN")
         
         datePicker.date = selectedDate
-        datePicker.datePickerMode = UIDatePickerMode.Date
+        datePicker.datePickerMode = UIDatePickerMode.date
         datePicker.locale = nsLocal
         
         timePicker.date = selectedDate
-        timePicker.datePickerMode = UIDatePickerMode.Time
+        timePicker.datePickerMode = UIDatePickerMode.time
         timePicker.locale = nsLocal
         
-        timePicker.hidden = true
-        btnLunarDate.hidden = true
+        timePicker.isHidden = true
+        btnLunarDate.isHidden = true
         
-        btnDate.setTitle(selectedDate.toFormatString(dateFormat), forState: UIControlState.Normal)
-        btnDate.setTitleColor(highLightColorBtn, forState: UIControlState.Normal)
+        btnDate.setTitle(selectedDate.toFormatString(dateFormat), for: UIControlState())
+        btnDate.setTitleColor(highLightColorBtn, for: UIControlState())
         
-        btnTime.setTitle(selectedDate.toFormatString(timeFormat), forState: UIControlState.Normal)
-        btnTime.setTitleColor(normalColorBtn, forState: UIControlState.Normal)
+        btnTime.setTitle(selectedDate.toFormatString(timeFormat), for: UIControlState())
+        btnTime.setTitleColor(normalColorBtn, for: UIControlState())
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,44 +75,44 @@ class DateSelectController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    var dateSelectedAction:(NSDate -> Void)?
+    var dateSelectedAction:((Date) -> Void)?
     
-    @IBAction func datePickerTimeSelect(sender: AnyObject) {
+    @IBAction func datePickerTimeSelect(_ sender: AnyObject) {
         
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-M-d HH:mm"
         let dateStr = selectedDate.toFormatString("yyyy-M-d")
         let timeStr = timePicker.date.toFormatString("HH:mm")
-        let date = formatter.dateFromString(dateStr + " " + timeStr)
+        let date = formatter.date(from: dateStr + " " + timeStr)
         selectedDate = date
         dateSelectedAction?(selectedDate)
         
-        btnTime.setTitle(selectedDate.toFormatString(timeFormat), forState: UIControlState.Normal)
+        btnTime.setTitle(selectedDate.toFormatString(timeFormat), for: UIControlState())
     }
-    @IBAction func dataPickerSelect(sender: AnyObject) {
+    @IBAction func dataPickerSelect(_ sender: AnyObject) {
         
         dateSelectedAction?(datePicker.date)
         selectedDate = datePicker.date
         
-        btnDate.setTitle(selectedDate.toFormatString(dateFormat), forState: UIControlState.Normal)
+        btnDate.setTitle(selectedDate.toFormatString(dateFormat), for: UIControlState())
         //self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func btnDateSelect(sender: AnyObject) {
-        btnDate.setTitleColor(highLightColorBtn, forState: UIControlState.Normal)
-        btnTime.setTitleColor(normalColorBtn, forState: UIControlState.Normal)
-        datePicker.hidden = false
-        timePicker.hidden = true
+    @IBAction func btnDateSelect(_ sender: AnyObject) {
+        btnDate.setTitleColor(highLightColorBtn, for: UIControlState())
+        btnTime.setTitleColor(normalColorBtn, for: UIControlState())
+        datePicker.isHidden = false
+        timePicker.isHidden = true
         
     }
-    @IBAction func btnTimeSelect(sender: AnyObject) {
-        btnTime.setTitleColor(highLightColorBtn, forState: UIControlState.Normal)
-        btnDate.setTitleColor(normalColorBtn, forState: UIControlState.Normal)
-        datePicker.hidden = true
-        timePicker.hidden = false
+    @IBAction func btnTimeSelect(_ sender: AnyObject) {
+        btnTime.setTitleColor(highLightColorBtn, for: UIControlState())
+        btnDate.setTitleColor(normalColorBtn, for: UIControlState())
+        datePicker.isHidden = true
+        timePicker.isHidden = false
     }
 
-    @IBAction func btnLunarDateSelect(sender: AnyObject) {
+    @IBAction func btnLunarDateSelect(_ sender: AnyObject) {
     }
     /*
     // MARK: - Navigation

@@ -22,8 +22,8 @@ class calendarTests: XCTestCase {
     }
     
     func testMonthSource() {
-        let source = MonthSource(date: NSDate())
-        let result = source.buildOneMonthSource(NSDate(year: 2017,month: 1,day: 5))
+        let source = MonthSource(Date())
+        let result = source.buildOneMonthSource(Date(year: 2017,month: 1,day: 5))
         print(result)
     }
     
@@ -43,7 +43,7 @@ class calendarTests: XCTestCase {
     }
     
     func testDayOfWeek() {
-        let date = NSDate(year: 2016,month: 9,day: 9)
+        let date = Date(year: 2016,month: 9,day: 9)
         print(date.dayOfWeek)
         
         XCTAssert(date.dayOfWeek == 6)
@@ -51,10 +51,10 @@ class calendarTests: XCTestCase {
     
     func testNSDateInitializer() {
         
-        let c = NSDate(year: 1982,month: 12,day: 16)
-        let dateFormatter = NSDateFormatter()
+        let c = Date(year: 1982,month: 12,day: 16)
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
-        let str = dateFormatter.stringFromDate(c)
+        let str = dateFormatter.string(from: c)
         
         var lunarDate = LunarDate(date: c)
        
@@ -64,7 +64,7 @@ class calendarTests: XCTestCase {
         var lunar = LunarDate(1982,11,2,false)
             
             //var de = try LunarDate(1982,11,2,false)
-            let s = try dateFormatter.stringFromDate(lunar.getDate())
+            let s = try dateFormatter.string(from: lunar.getDate())
             
             print(s)
             
@@ -73,7 +73,7 @@ class calendarTests: XCTestCase {
             print(lunar.lunarMonthText)
             print(lunar.lunarDayText)
             
-            let testDate = NSDate(year: 1982,month: 12,day: 16, hour: 6, min: 5)
+            let testDate = Date(year: 1982,month: 12,day: 16, hour: 6, min: 5)
             
             let st = LunarSolarTerm(date: testDate)
             
@@ -93,7 +93,7 @@ class calendarTests: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }

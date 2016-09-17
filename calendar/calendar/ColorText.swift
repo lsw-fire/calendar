@@ -10,14 +10,14 @@ import UIKit
 
 class ColorText: NSObject {
     
-    private static var dicColorString : Dictionary<String,NSAttributedString> = Dictionary<String,NSAttributedString>()
+    fileprivate static var dicColorString : Dictionary<String,NSAttributedString> = Dictionary<String,NSAttributedString>()
     
-    class func getColorEraText(celestial:String = "", terrestial:String = "") -> NSAttributedString {
+    class func getColorEraText(_ celestial:String = "", terrestial:String = "") -> NSAttributedString {
         
         let listString = NSMutableAttributedString()
         
         if dicColorString.keys.contains(celestial) {
-            listString.appendAttributedString(dicColorString[celestial]!)
+            listString.append(dicColorString[celestial]!)
         }
         else{
             if !celestial.isEmpty {
@@ -27,13 +27,13 @@ class ColorText: NSObject {
             let cAttribute = [NSForegroundColorAttributeName : cUIColor!]
             let cString = NSAttributedString(string: celestial, attributes: cAttribute)
             
-            listString.appendAttributedString(cString)
+            listString.append(cString)
             dicColorString[celestial] = cString
             }
         }
         
         if dicColorString.keys.contains(terrestial) {
-            listString.appendAttributedString(dicColorString[terrestial]!)
+            listString.append(dicColorString[terrestial]!)
         }
         else{
             
@@ -44,7 +44,7 @@ class ColorText: NSObject {
             let tAttribute = [NSForegroundColorAttributeName : tUIColor!]
             let tString = NSAttributedString(string: terrestial, attributes: tAttribute)
             
-            listString.appendAttributedString(tString)
+            listString.append(tString)
             dicColorString[terrestial] = tString
             }
         }

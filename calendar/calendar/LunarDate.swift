@@ -10,11 +10,11 @@ import UIKit
 
 class LunarDate :NSObject{
     
-    private let minYear : Int = 1616
-    private let minMonth : Int = 2
-    private let minDay : Int = 17
+    fileprivate let minYear : Int = 1616
+    fileprivate let minMonth : Int = 2
+    fileprivate let minDay : Int = 17
     
-    private let lunarDateArray : [Int] = [0x09b50,0x04b60,0x0aae4,0x0a4f0,0x05260,0x1d262,0x0d550,0x15a9a,0x056a0,0x096d0,
+    fileprivate let lunarDateArray : [Int] = [0x09b50,0x04b60,0x0aae4,0x0a4f0,0x05260,0x1d262,0x0d550,0x15a9a,0x056a0,0x096d0,
                                           0x149d6,0x049e0,0x0a4d0,0x0d4d4,0x0d250,0x0d53b,0x0b540,0x0b5a0,0x195a8,0x095b0,
                                           0x049b0,0x0a974,0x0a4b0,0x02a50,0x0ea51,0x06d40,0x0adbb,0x02b60,0x09370,0x04af6,
                                           0x04970,0x064b0,0x164a4,0x0da50,0x06b20,0x196c2,0x0ab60,0x192d6,0x092e0,0x0c960,
@@ -69,9 +69,9 @@ class LunarDate :NSObject{
                                           0x0e968,0x0d520,0x0daa0,0x06aa6,0x056df,0x04ae0,0x0a9d4,0x0a4d0,0x0d150,0x0f252,
                                           0x0d520]
     
-    func getMinLunarDate() -> NSDate {
-        let calendar = NSCalendar.init(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let dateComponent = NSDateComponents()
+    func getMinLunarDate() -> Date {
+        let calendar = Calendar.init(identifier: Calendar.Identifier.gregorian)
+        var dateComponent = DateComponents()
         //dateComponent.timeZone = NSTimeZone(abbreviation: "CST")
         dateComponent.year = minYear
         dateComponent.month = minMonth
@@ -79,12 +79,12 @@ class LunarDate :NSObject{
         dateComponent.hour = 0
         dateComponent.minute = 0
         
-        let date = calendar!.dateFromComponents(dateComponent)
+        let date = calendar.date(from: dateComponent)
         return date!
     }
     
-    func checkDateLimit(date: NSDate) -> Bool {
-        let maxDate = NSDate(year: minYear + lunarDateArray.count, month: minMonth, day: minDay)
+    func checkDateLimit(_ date: Date) -> Bool {
+        let maxDate = Date(year: minYear + lunarDateArray.count, month: minMonth, day: minDay)
         
         if date.isLessThan(getMinLunarDate()) || date.isGreaterThan(maxDate)
         {
@@ -97,9 +97,9 @@ class LunarDate :NSObject{
     }
     //var getLunarYear : Int { get { return lunarYear} }
     
-    private (set) var lunarYear: Int = 0
-    public private (set) var lunarMonth: Int = 0
-    private (set) var lunarDay:Int = 0
+    fileprivate (set) var lunarYear: Int = 0
+    open fileprivate (set) var lunarMonth: Int = 0
+    fileprivate (set) var lunarDay:Int = 0
     var isLeapMonth: Bool = false
     
     init(_ lunarYear:Int, _ lunarMonth:Int, _ lunarDay:Int, _ isLeapMonth: Bool) {
@@ -109,14 +109,15 @@ class LunarDate :NSObject{
         self.isLeapMonth = isLeapMonth
     }
     
-    init(date: NSDate){
+    init(paramDate: Date){
         
         super.init()
         
+        var date = paramDate
         //修正时间如果是0点0分，会计算少一天(Android复制过来的，应该测试一下）
         if(date.hour == 0 && date.minute == 0)
         {
-            date.plusSeconds(1)
+            date = date.plusSeconds(1)
         }
         
         var minYear : Int  { get { return self.minYear }}
@@ -131,7 +132,7 @@ class LunarDate :NSObject{
             temp = 0
             
             //计算最小日期到计算日期的差距
-            offset = NSDate.daysBetween(date1: minDate, date2: date)
+            offset = Date.daysBetween(date1: minDate, date2: date)
             
             let maxYear = minYear + lunarDateArray.count
             
@@ -191,7 +192,7 @@ class LunarDate :NSObject{
         
     }
     
-    private func getChineseYearDays(year : Int) -> Int {
+    fileprivate func getChineseYearDays(_ year : Int) -> Int {
         var i, f, sumDay, info : Int
         
         sumDay = 348 //29天x12个月
@@ -214,7 +215,7 @@ class LunarDate :NSObject{
         return sumDay + getChineseLeapMonthDays(year)
     }
     
-    func getChineseLeapMonthDays(year : Int) -> Int {
+    func getChineseLeapMonthDays(_ year : Int) -> Int {
         
         if getChineseLeapMonth(year) != 0 {
             
@@ -231,11 +232,11 @@ class LunarDate :NSObject{
         }
     }
     
-    func getChineseLeapMonth(year: Int) -> Int {
+    func getChineseLeapMonth(_ year: Int) -> Int {
         return lunarDateArray[year-minYear] & 0xF
     }
     
-    func getChineseMonthDays(year: Int, _ month: Int) -> Int {
+    func getChineseMonthDays(_ year: Int, _ month: Int) -> Int {
         
         if bitTest32(lunarDateArray[year - minYear] & 0x0000FFFF, bitPosition: (16-month))
         {
@@ -247,7 +248,7 @@ class LunarDate :NSObject{
         }
     }
     
-    private func bitTest32(num: Int, bitPosition: Int) -> Bool {
+    fileprivate func bitTest32(_ num: Int, bitPosition: Int) -> Bool {
         if(bitPosition > 31) || (bitPosition < 0)
         {
             _ = "Error Param: bitpositon[0-31]:" + String(bitPosition)
@@ -268,7 +269,7 @@ class LunarDate :NSObject{
         
     }
     
-    func getDate() throws -> NSDate
+    func getDate() throws -> Date
     {
         var minYear, leapMonth, temp, offset : Int
         
@@ -316,7 +317,7 @@ class LunarDate :NSObject{
             let monthDays = getChineseMonthDays(lunarMonth, lunarMonth)
             if lunarDay > monthDays
             {
-                throw ErrorChieseDateValidation.InvalidLunarDay(minDay: 1, maxDay: monthDays)
+                throw ErrorChieseDateValidation.invalidLunarDay(minDay: 1, maxDay: monthDays)
             }
             offset = offset + lunarDay
         }
@@ -337,7 +338,7 @@ class LunarDate :NSObject{
                 
                 if lunarDay > monthDays
                 {
-                    throw ErrorChieseDateValidation.InvalidLunarDay(minDay: 1, maxDay: monthDays)
+                    throw ErrorChieseDateValidation.invalidLunarDay(minDay: 1, maxDay: monthDays)
                 }
                 offset = offset + lunarDay
             }
@@ -352,7 +353,7 @@ class LunarDate :NSObject{
                 let monthDays = getChineseLeapMonthDays(lunarYear)
                 if lunarDay > monthDays
                 {
-                    throw ErrorChieseDateValidation.InvalidLunarDay(minDay: 1, maxDay: monthDays)
+                    throw ErrorChieseDateValidation.invalidLunarDay(minDay: 1, maxDay: monthDays)
                 }
                 
                 offset = offset + lunarDay
@@ -364,43 +365,43 @@ class LunarDate :NSObject{
         return date
     }
     
-    private func checkChineseDateLimit(year : Int, month: Int, day:Int, isLeapMonth: Bool) throws
+    fileprivate func checkChineseDateLimit(_ year : Int, month: Int, day:Int, isLeapMonth: Bool) throws
     {
         let maxYear = lunarDateArray.count + minYear
         
         if year < minYear || year > maxYear
         {
-            throw ErrorChieseDateValidation.InvalidLunarYear(minYear: minYear, maxYear: maxYear)
+            throw ErrorChieseDateValidation.invalidLunarYear(minYear: minYear, maxYear: maxYear)
         }
         
         if month < 1 || month > 12
         {
-            throw ErrorChieseDateValidation.InvalidLunarMonth(mintMonth: 1, maxMonth: 12)
+            throw ErrorChieseDateValidation.invalidLunarMonth(mintMonth: 1, maxMonth: 12)
         }
         
         if day < 1 || day > 30
         {
-            throw ErrorChieseDateValidation.InvalidLunarDay(minDay: 1, maxDay: 30)
+            throw ErrorChieseDateValidation.invalidLunarDay(minDay: 1, maxDay: 30)
         }
         
         let leapMonth = getChineseLeapMonth(year)
         if isLeapMonth && leapMonth != month
         {
-            throw ErrorChieseDateValidation.InvalidLeapMonth(currentYear: year, leapMonth: leapMonth)
+            throw ErrorChieseDateValidation.invalidLeapMonth(currentYear: year, leapMonth: leapMonth)
         }
     }
     
-    enum ErrorChieseDateValidation: ErrorType {
-        case InvalidLunarYear(minYear: Int, maxYear: Int)
-        case InvalidLunarMonth(mintMonth: Int, maxMonth:Int)
-        case InvalidLunarDay(minDay:Int, maxDay:Int)
-        case InvalidLeapMonth(currentYear:Int, leapMonth:Int)
+    enum ErrorChieseDateValidation: Error {
+        case invalidLunarYear(minYear: Int, maxYear: Int)
+        case invalidLunarMonth(mintMonth: Int, maxMonth:Int)
+        case invalidLunarDay(minDay:Int, maxDay:Int)
+        case invalidLeapMonth(currentYear:Int, leapMonth:Int)
         
     }
     
-    private let lunarMonthTextArray : [String] = ["正","二","三","四","五","六","七","八","九","十","十一","腊"]
+    fileprivate let lunarMonthTextArray : [String] = ["正","二","三","四","五","六","七","八","九","十","十一","腊"]
     
-    func getLunarMonthTextByValue(value:Int) -> String {
+    func getLunarMonthTextByValue(_ value:Int) -> String {
         return lunarMonthTextArray[value-1]
     }
     
@@ -412,8 +413,8 @@ class LunarDate :NSObject{
         }
     }
     
-    private let lunarDayTextArray1 : [String] = ["一","二","三","四","五","六","七","八","九"]
-    private let lunarDayTextArray2 : [String] = ["初","十","廿","卅"]
+    fileprivate let lunarDayTextArray1 : [String] = ["一","二","三","四","五","六","七","八","九"]
+    fileprivate let lunarDayTextArray2 : [String] = ["初","十","廿","卅"]
     
     var lunarDayText : String
         {
@@ -423,7 +424,7 @@ class LunarDate :NSObject{
         }
     }
     
-    func getLunarDayTextByValue(value:Int) -> String {
+    func getLunarDayTextByValue(_ value:Int) -> String {
         switch value {
         case 0:
             return ""
@@ -439,7 +440,7 @@ class LunarDate :NSObject{
 
     }
     
-    private let lunarYearTextArray : [String] = ["零","一","二","三","四","五","六","七","八","九"]
+    fileprivate let lunarYearTextArray : [String] = ["零","一","二","三","四","五","六","七","八","九"]
     
     var lunarYearText: String
         {

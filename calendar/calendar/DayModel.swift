@@ -28,7 +28,7 @@ struct DayModel {
     }
     var solarTermText: String!
     
-    mutating func setIsSelected(isSelected:Bool) {
+    mutating func setIsSelected(_ isSelected:Bool) {
         self.isSelected = isSelected
     }
 }

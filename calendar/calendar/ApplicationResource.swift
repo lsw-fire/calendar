@@ -16,26 +16,26 @@ class ApplicationResource: NSObject {
         return _SingletonSharedInstance
     }
     
-    internal private(set) var jsonSource : Dictionary<String,AnyObject>! = nil
+    internal fileprivate(set) var jsonSource : Dictionary<String,AnyObject>! = nil
     
     override init() {
         
         super.init()
         
-        let bundle : NSBundle = NSBundle.mainBundle()
-        let jsonPath = bundle.pathForResource("Source.json", ofType: nil)
-        let jsonData = NSData.init(contentsOfFile: jsonPath!)
+        let bundle : Bundle = Bundle.main
+        let jsonPath = bundle.path(forResource: "Source.json", ofType: nil)
+        let jsonData = try? Data.init(contentsOf: URL(fileURLWithPath: jsonPath!))
         
         do
         {
-            jsonSource = try NSJSONSerialization.JSONObjectWithData(jsonData!, options: .MutableContainers) as! Dictionary<String,AnyObject>
+            jsonSource = try JSONSerialization.jsonObject(with: jsonData!, options: .mutableContainers) as! Dictionary<String,AnyObject>
         }
         catch let error as NSError {
             print(error.localizedDescription)
         }
         
         if !userDefaults.dictionaryRepresentation().keys.contains(viewRotateDirection) {
-             self.setMonthViewRotateDirection(UICollectionViewScrollDirection.Vertical)
+             self.setMonthViewRotateDirection(UICollectionViewScrollDirection.vertical)
         }
     }
     
@@ -53,31 +53,31 @@ class ApplicationResource: NSObject {
         }
     }
     
-    func getCelestialPropertyBy(name: String) -> Dictionary<String,String> {
+    func getCelestialPropertyBy(_ name: String) -> Dictionary<String,String> {
         return celestialStem[name] as! Dictionary<String,String>
     }
     
-    func getTerrestialPropertyBy(name: String) -> Dictionary<String,AnyObject> {
+    func getTerrestialPropertyBy(_ name: String) -> Dictionary<String,AnyObject> {
         return terrestialBranch[name] as! Dictionary<String,AnyObject>
     }
     
     let colorDictionary : Dictionary<String,UIColor> = [
-            "Red":UIColor.redColor(),
+            "Red":UIColor.red,
             "Yellow":UIColor(red: 255/255, green: 215/255, blue: 0/255, alpha: 1),
-            "Brown":UIColor.brownColor(),
+            "Brown":UIColor.brown,
             "Green":UIColor(red: 34/255, green: 193/255, blue: 34/255, alpha: 1),
-            "Blue":UIColor.blueColor()
+            "Blue":UIColor.blue
     ]
     
     //user defaults
-    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let userDefaults = UserDefaults.standard
     let viewRotateDirection = "viewRotateDirection"
-    func setMonthViewRotateDirection(direction:UICollectionViewScrollDirection) {
-        userDefaults.setInteger(direction.rawValue, forKey: viewRotateDirection)
+    func setMonthViewRotateDirection(_ direction:UICollectionViewScrollDirection) {
+        userDefaults.set(direction.rawValue, forKey: viewRotateDirection)
         userDefaults.synchronize()
     }
     
     func getMonthViewRotateDirection() -> UICollectionViewScrollDirection {
-         return UICollectionViewScrollDirection(rawValue: userDefaults.integerForKey(viewRotateDirection))!
+         return UICollectionViewScrollDirection(rawValue: userDefaults.integer(forKey: viewRotateDirection))!
     }
 }

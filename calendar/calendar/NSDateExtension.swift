@@ -9,22 +9,22 @@
 import UIKit
 
 
-extension NSDate {
+extension Date {
     
-    convenience init(date: NSDate) {
-        self.init(timeInterval:0, sinceDate: date )
+    init(date: Date) {
+        self.init(timeInterval:0, since: date )
     }
     
-    convenience init(year:Int!, month:Int!, day:Int!, hour:Int! = 0, min:Int! = 0, second:Int = 0) {
+    init(year:Int!, month:Int!, day:Int!, hour:Int! = 0, min:Int! = 0, second:Int = 0) {
         
         if(year == nil || month == nil || day == nil)
         {
             self.init()
             return
         }
-        let calendar = NSCalendar.currentCalendar()
+        let calendar = Calendar.current
         
-        let dateComponent = NSDateComponents()
+        var dateComponent = DateComponents()
         dateComponent.year = year
         dateComponent.month = month
         dateComponent.day = day
@@ -32,15 +32,15 @@ extension NSDate {
         dateComponent.minute = min
         dateComponent.second = second
         
-        self.init(timeInterval:0,sinceDate: calendar.dateFromComponents(dateComponent)!)
+        self.init(timeInterval:0,since: calendar.date(from: dateComponent)!)
     }
     
     
-    func getDateComponents() -> NSDateComponents {
+    func getDateComponents() -> DateComponents {
         
-        let calendar = NSCalendar.currentCalendar()
+        let calendar = Calendar.current
         
-        let components = calendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day], fromDate: self)
+        let components = (calendar as NSCalendar).components([NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day], from: self)
         
         return components
     }
@@ -48,95 +48,95 @@ extension NSDate {
     public var dayOfWeek : Int {
         get{
             
-            let myCalendar = NSCalendar.currentCalendar()
-            let myComponents = myCalendar.components(.Weekday, fromDate: self)
+            let myCalendar = Calendar.current
+            let myComponents = (myCalendar as NSCalendar).components(.weekday, from: self)
             let weekDay = myComponents.weekday
-            return weekDay
+            return weekDay!
         }
     }
     
     public var day: Int {
-        return NSCalendar.currentCalendar().component(.Day, fromDate: self)
+        return (Calendar.current as NSCalendar).component(.day, from: self)
     }
     
     public var month: Int {
-        return NSCalendar.currentCalendar().component(.Month, fromDate: self)
+        return (Calendar.current as NSCalendar).component(.month, from: self)
     }
     
     public var year: Int {
-        return NSCalendar.currentCalendar().component(.Year, fromDate: self)
+        return (Calendar.current as NSCalendar).component(.year, from: self)
     }
     
     public var hour: Int {
-        return NSCalendar.currentCalendar().component(.Hour, fromDate: self)
+        return (Calendar.current as NSCalendar).component(.hour, from: self)
     }
     
     public var minute: Int {
-        return NSCalendar.currentCalendar().component(.Minute, fromDate: self)
+        return (Calendar.current as NSCalendar).component(.minute, from: self)
     }
     
     public var second: Int {
-        return NSCalendar.currentCalendar().component(.Second, fromDate: self)
+        return (Calendar.current as NSCalendar).component(.second, from: self)
     }
     
-    public func plusSeconds(s: Int) -> NSDate {
+    public func plusSeconds(_ s: Int) -> Date {
         return self.addComponentsToDate(seconds: s, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func minusSeconds(s: Int) -> NSDate {
+    public func minusSeconds(_ s: Int) -> Date {
         return self.addComponentsToDate(seconds: -s, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func plusMinutes(m: Int) -> NSDate {
+    public func plusMinutes(_ m: Int) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: m, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func minusMinutes(m: Int) -> NSDate {
+    public func minusMinutes(_ m: Int) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: -m, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func plusHours(h: Int) -> NSDate {
+    public func plusHours(_ h: Int) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: h, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func minusHours(h: Int) -> NSDate {
+    public func minusHours(_ h: Int) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: -h, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func plusDays(d: Int) -> NSDate {
+    public func plusDays(_ d: Int) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: d, weeks: 0, months: 0, years: 0)
     }
     
-    public func minusDays(d: Int) -> NSDate {
+    public func minusDays(_ d: Int) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: -d, weeks: 0, months: 0, years: 0)
     }
     
-    public func plusWeeks(w: Int) -> NSDate {
+    public func plusWeeks(_ w: Int) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: w, months: 0, years: 0)
     }
     
-    public func minusWeeks(w: Int) -> NSDate {
+    public func minusWeeks(_ w: Int) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: -w, months: 0, years: 0)
     }
     
-    public func plusMonths(m: Int) -> NSDate {
+    public func plusMonths(_ m: Int) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: m, years: 0)
     }
     
-    public func minusMonths(m: Int) -> NSDate {
+    public func minusMonths(_ m: Int) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: -m, years: 0)
     }
     
-    public func plusYears(y: Int) -> NSDate {
+    public func plusYears(_ y: Int) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: y)
     }
     
-    public func minusYears(y: Int) -> NSDate {
+    public func minusYears(_ y: Int) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: -y)
     }
     
-    private func addComponentsToDate(seconds sec: Int, minutes min: Int, hours hrs: Int, days d: Int, weeks wks: Int, months mts: Int, years yrs: Int) -> NSDate {
-        let dc: NSDateComponents = NSDateComponents()
+    fileprivate func addComponentsToDate(seconds sec: Int, minutes min: Int, hours hrs: Int, days d: Int, weeks wks: Int, months mts: Int, years yrs: Int) -> Date {
+        var dc: DateComponents = DateComponents()
         dc.second = sec
         dc.minute = min
         dc.hour = hrs
@@ -144,55 +144,55 @@ extension NSDate {
         dc.weekOfYear = wks
         dc.month = mts
         dc.year = yrs
-        return NSCalendar.currentCalendar().dateByAddingComponents(dc, toDate: self, options: [])!
+        return (Calendar.current as NSCalendar).date(byAdding: dc, to: self, options: [])!
     }
     
-    public func isGreaterThan(date: NSDate) -> Bool {
-        return (self.compare(date) == .OrderedDescending)
+    public func isGreaterThan(_ date: Date) -> Bool {
+        return (self.compare(date) == .orderedDescending)
     }
     
-    public func isLessThan(date: NSDate) -> Bool {
-        return (self.compare(date) == .OrderedAscending)
+    public func isLessThan(_ date: Date) -> Bool {
+        return (self.compare(date) == .orderedAscending)
     }
     
-    public class func secondsBetween(date1 d1:NSDate, date2 d2:NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.Second, fromDate: d1, toDate: d2, options:[])
-        return dc.second
+    public static func secondsBetween(date1 d1:Date, date2 d2:Date) -> Int {
+        let dc = (Calendar.current as NSCalendar).components(NSCalendar.Unit.second, from: d1, to: d2, options:[])
+        return dc.second!
     }
     
-    public class func minutesBetween(date1 d1: NSDate, date2 d2: NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.Minute, fromDate: d1, toDate: d2, options: [])
-        return dc.minute
+    public static func minutesBetween(date1 d1: Date, date2 d2: Date) -> Int {
+        let dc = (Calendar.current as NSCalendar).components(NSCalendar.Unit.minute, from: d1, to: d2, options: [])
+        return dc.minute!
     }
     
-    public class func hoursBetween(date1 d1: NSDate, date2 d2: NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.Hour, fromDate: d1, toDate: d2, options: [])
-        return dc.hour
+    public static func hoursBetween(date1 d1: Date, date2 d2: Date) -> Int {
+        let dc = (Calendar.current as NSCalendar).components(NSCalendar.Unit.hour, from: d1, to: d2, options: [])
+        return dc.hour!
     }
     
-    public class func daysBetween(date1 d1: NSDate, date2 d2: NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.Day, fromDate: d1, toDate: d2, options: [])
-        return dc.day
+    public static func daysBetween(date1 d1: Date, date2 d2: Date) -> Int {
+        let dc = (Calendar.current as NSCalendar).components(NSCalendar.Unit.day, from: d1, to: d2, options: [])
+        return dc.day!
     }
     
-    public class func weeksBetween(date1 d1: NSDate, date2 d2: NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.WeekOfYear, fromDate: d1, toDate: d2, options: [])
-        return dc.weekOfYear
+    public static func weeksBetween(date1 d1: Date, date2 d2: Date) -> Int {
+        let dc = (Calendar.current as NSCalendar).components(NSCalendar.Unit.weekOfYear, from: d1, to: d2, options: [])
+        return dc.weekOfYear!
     }
     
-    public class func monthsBetween(date1 d1: NSDate, date2 d2: NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.Month, fromDate: d1, toDate: d2, options: [])
-        return dc.month
+    public static func monthsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+        let dc = (Calendar.current as NSCalendar).components(NSCalendar.Unit.month, from: d1, to: d2, options: [])
+        return dc.month!
     }
     
-    public class func yearsBetween(date1 d1: NSDate, date2 d2: NSDate) -> Int {
-        let dc = NSCalendar.currentCalendar().components(NSCalendarUnit.Year, fromDate: d1, toDate: d2, options: [])
-        return dc.year
+    public static func yearsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+        let dc = (Calendar.current as NSCalendar).components(NSCalendar.Unit.year, from: d1, to: d2, options: [])
+        return dc.year!
     }
     
-    func toFormatString(format:String) -> String {
-        let dateFormatter = NSDateFormatter()
+    func toFormatString(_ format:String) -> String {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        return dateFormatter.stringFromDate(self)
+        return dateFormatter.string(from: self)
     }
 }

@@ -19,8 +19,8 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     @IBOutlet weak var lbLunarDate: UILabel!
     @IBOutlet weak var lbSolarTermDate: UILabel!
     
-    @IBAction func btnToday(sender: AnyObject) {
-        currentMonthDate = NSDate()
+    @IBAction func btnToday(_ sender: AnyObject) {
+        currentMonthDate = Date()
         source = getSource(currentMonthDate)
         cv.reloadData()
         loadTitle()
@@ -30,16 +30,16 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     func goToDateSelectController()
     {
         let strDate = lbSelectedDateTime.text
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = dateFormat
-        let date = formatter.dateFromString(strDate!)
+        let date = formatter.date(from: strDate!)
         
         //        self.performSegueWithIdentifier("toDateSelectController", sender: self)
-        let dateSelectController = self.storyboard!.instantiateViewControllerWithIdentifier("DateSelectController") as! DateSelectController
+        let dateSelectController = self.storyboard!.instantiateViewController(withIdentifier: "DateSelectController") as! DateSelectController
         
         dateSelectController.selectedDate = date
         dateSelectController.dateSelectedAction = { date in
-            self.currentMonthDate = date
+            self.currentMonthDate = date as Date
             self.source = self.getSource(self.currentMonthDate)
             self.cv.reloadData()
             self.loadTitle()
@@ -67,40 +67,40 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         
         cv.dataSource = self;
         cv.delegate = self;
-        cv.backgroundColor = UIColor.whiteColor()
+        cv.backgroundColor = UIColor.white
         
         //给控件增加手势要打开这一项
-        lbSelectedDateTime.userInteractionEnabled = true
+        lbSelectedDateTime.isUserInteractionEnabled = true
         
         let gesture = LabelTapGestureRecognizer(target: self)
         
         gesture.onTouch = { touch in
             self.outOfLabel = false
-            self.lbSelectedDateTime.backgroundColor = UIColor.lightGrayColor()
-            self.lbSelectedDateTime.textColor = UIColor.whiteColor()
+            self.lbSelectedDateTime.backgroundColor = UIColor.lightGray
+            self.lbSelectedDateTime.textColor = UIColor.white
         }
         gesture.onEnded = { touch in
-            self.lbSelectedDateTime.backgroundColor = UIColor.whiteColor()
-            self.lbSelectedDateTime.textColor = UIColor.darkGrayColor()
+            self.lbSelectedDateTime.backgroundColor = UIColor.white
+            self.lbSelectedDateTime.textColor = UIColor.darkGray
             if !self.outOfLabel {
                 self.goToDateSelectController()
             }
         }
         gesture.onMoved = { touch in
-            let _transX =  touch.locationInView(self.lbSelectedDateTime).x
-            let _transY =  touch.locationInView(self.lbSelectedDateTime).y
+            let _transX =  touch.location(in: self.lbSelectedDateTime).x
+            let _transY =  touch.location(in: self.lbSelectedDateTime).y
             
             let rect = self.lbSelectedDateTime.bounds
             
             if _transX < 0 || _transX > rect.width {
-                self.lbSelectedDateTime.backgroundColor = UIColor.whiteColor()
-                self.lbSelectedDateTime.textColor = UIColor.darkGrayColor()
+                self.lbSelectedDateTime.backgroundColor = UIColor.white
+                self.lbSelectedDateTime.textColor = UIColor.darkGray
                 self.outOfLabel = true
             }
             
             if _transY < 0 || _transY > rect.height {
-                self.lbSelectedDateTime.backgroundColor = UIColor.whiteColor()
-                self.lbSelectedDateTime.textColor = UIColor.darkGrayColor()
+                self.lbSelectedDateTime.backgroundColor = UIColor.white
+                self.lbSelectedDateTime.textColor = UIColor.darkGray
                 self.outOfLabel = true
             }
             
@@ -114,7 +114,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         // Do any additional setup after loading the view.
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         print(fromInterfaceOrientation.isLandscape)
         if fromInterfaceOrientation.isPortrait {
             
@@ -126,21 +126,21 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     func loadTitle()  {
         lbSelectedDateTime.text = currentMonthDate.toFormatString(dateFormat)
-        let lunarST = LunarSolarTerm(date: currentMonthDate)
+        let lunarST = LunarSolarTerm(paramDate: currentMonthDate)
         let eraY = lunarST.getEraYearText()
         let eraM = lunarST.getEraMonthText()
         let eraD = lunarST.getEraDayText()
@@ -165,11 +165,11 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         lbSolarTermDate.text = solarTerm.solarTerm1.name+" : "+solarTerm.solarTerm1.solarTermDate.toFormatString("d日-HH:mm")+"\n"+solarTerm.solarTerm2.name+" : "+solarTerm.solarTerm2.solarTermDate.toFormatString("d日-HH:mm")
     }
     
-    var currentMonthDate : NSDate = NSDate()
+    var currentMonthDate : Date = Date()
     
     func reloadView() {
         
-        let size = UIScreen.mainScreen().bounds
+        let size = UIScreen.main.bounds
         
         var isPortrait = true
         if size.height < size.width {
@@ -198,16 +198,16 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         //在这给每一个item cell设置大小，因为在viewDidLoad方法时还得不到整体viewcollection的size，得到的是默认在stoarybord里的那个尺寸
         
         let itemWidth = cv.frame.size.width / CGFloat(7)
-        layout.itemSize = CGSizeMake(itemWidth, cv.frame.size.height / CGFloat(6))
+        layout.itemSize = CGSize(width: itemWidth, height: cv.frame.size.height / CGFloat(6))
         //layout.itemSize = CGSizeMake(itemWidth, itemWidth * CGFloat(6))
         
         cv.collectionViewLayout = layout
-        cv.pagingEnabled = true
+        cv.isPagingEnabled = true
         cv.showsHorizontalScrollIndicator = false
         cv.showsVerticalScrollIndicator = false
         
         //初始化第几页
-        if rotateDirection == .Horizontal {
+        if rotateDirection == .horizontal {
             cv.contentOffset.x = cv.frame.size.width
         }
         else
@@ -223,24 +223,24 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         let cvHeaderTitle :[String] = ["日","一","二","三","四","五","六"]
         var x = CGFloat(0);
         for i in 1...7 {
-            let label = UILabel(frame: CGRectMake(x,0,itemWidth,cvHeader.frame.size.height))
+            let label = UILabel(frame: CGRect(x: x,y: 0,width: itemWidth,height: cvHeader.frame.size.height))
             
             label.text = cvHeaderTitle[i-1]
-            label.textColor = UIColor.whiteColor()
+            label.textColor = UIColor.white
             //label.backgroundColor = UIColor.redColor()
             
-            label.textAlignment = NSTextAlignment.Center
+            label.textAlignment = NSTextAlignment.center
             cvHeader.addSubview(label)
             
-            cvHeader.backgroundColor = UIColor.orangeColor()
+            cvHeader.backgroundColor = UIColor.orange
             x = itemWidth * CGFloat(i)
         }
         
         let layer = CALayer()
         let height = cv.frame.size.height + cvHeader.frame.size.height+0.5
         let width = cv.frame.size.width + 0.5
-        layer.frame = CGRectMake(CGFloat(0), CGFloat(0), width, height)
-        layer.borderColor = UIColor.orangeColor().CGColor
+        layer.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: width, height: height)
+        layer.borderColor = UIColor.orange.cgColor
         layer.borderWidth = 1
         
         cvHeader.layer.addSublayer(layer)
@@ -263,48 +263,48 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         // Dispose of any resources that can be recreated.
     }
     
-    var source = Array<DayModel!>()
+    var source = Array<DayModel?>()
     
-    func getSource(date: NSDate) -> Array<DayModel!>
+    func getSource(_ date: Date) -> Array<DayModel?>
     {
-        let month = MonthSource()
-        var s = Array<DayModel!>()
+        let month = MonthSource(date:Date())
+        var s = Array<DayModel?>()
         let pre = month.buildOneMonthSource(date.plusMonths(-1))
         let current = month.buildOneMonthSource(date)
         let next = month.buildOneMonthSource(date.plusMonths(1))
         
-        s.appendContentsOf(pre)
-        s.appendContentsOf(current)
-        s.appendContentsOf(next)
+        s.append(contentsOf: pre)
+        s.append(contentsOf: current)
+        s.append(contentsOf: next)
         
         return s
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
     
     //定义展示的UICollectionViewCell的个数
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         //NSLog("section=%d", section)
         return 42
     }
     
     //选中某一天
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let beginIndex = indexPath.section == 0 ? 0 : (42 * indexPath.section)
+        let beginIndex = (indexPath as NSIndexPath).section == 0 ? 0 : (42 * (indexPath as NSIndexPath).section)
         
-        if let selected = source[indexPath.row + beginIndex]
+        if let selected = source[(indexPath as NSIndexPath).row + beginIndex]
         {
             
-            let cell: DayColletionViewCell  = collectionView.cellForItemAtIndexPath(indexPath) as! DayColletionViewCell
+            let cell: DayColletionViewCell  = collectionView.cellForItem(at: indexPath) as! DayColletionViewCell
             
             if cell != currentSelectedDayCell {
                 
                 if let beforeSelectedCell = currentSelectedDayCell {
-                    beforeSelectedCell.lbDay.backgroundColor = UIColor.whiteColor()
+                    beforeSelectedCell.lbDay.backgroundColor = UIColor.white
                     beforeSelectedCell.lbDay.textColor = dayTextColorNormal
                 }
                 
@@ -313,8 +313,8 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
                 if cell != currentTodayCell {
                     
                     //当前月的日期选中
-                    cell.lbDay.textColor = UIColor.whiteColor()
-                    cell.lbDay.backgroundColor = UIColor.lightGrayColor()
+                    cell.lbDay.textColor = UIColor.white
+                    cell.lbDay.backgroundColor = UIColor.lightGray
                     //cell.lbDay.layer.cornerRadius = 5
                     
                     currentSelectedDayCell = cell
@@ -324,11 +324,11 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
                     currentSelectedDayCell = nil
                 }
                 
-                let formatter = NSDateFormatter()
+                let formatter = DateFormatter()
                 formatter.dateFormat = dateFormatFromCell
                 let currentTime = currentMonthDate.toFormatString(" HH:mm")
                 
-                let date = formatter.dateFromString(selected.formatDate + " " + currentTime)
+                let date = formatter.date(from: selected.formatDate + " " + currentTime)
                 
                 currentMonthDate = date!
                 
@@ -339,24 +339,24 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     
     @IBOutlet weak var selectDateTopConstraint: NSLayoutConstraint!
     
-    let dayTextColorNormal = UIColor.blackColor()
+    let dayTextColorNormal = UIColor.black
     var currentSelectedDayCell: DayColletionViewCell! = nil
     var currentTodayCell: DayColletionViewCell! = nil
     //每个UICollectionView展示的内容
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell: DayColletionViewCell  = collectionView.dequeueReusableCellWithReuseIdentifier("defaultCell", forIndexPath: indexPath) as! DayColletionViewCell
+        let cell: DayColletionViewCell  = collectionView.dequeueReusableCell(withReuseIdentifier: "defaultCell", for: indexPath) as! DayColletionViewCell
         
-        cell.backgroundColor = UIColor.whiteColor()
+        cell.backgroundColor = UIColor.white
         cell.layer.borderWidth = 0.5
-        cell.layer.borderColor = UIColor.orangeColor().CGColor
+        cell.layer.borderColor = UIColor.orange.cgColor
         
-        let beginIndex = indexPath.section == 0 ? 0 : (42 * indexPath.section)
+        let beginIndex = (indexPath as NSIndexPath).section == 0 ? 0 : (42 * (indexPath as NSIndexPath).section)
         
-        cell.lbDay.backgroundColor = UIColor.whiteColor()
+        cell.lbDay.backgroundColor = UIColor.white
         let selectedDay = currentMonthDate.day
         
-        if let model = source[indexPath.row  + beginIndex] {
+        if let model = source[(indexPath as NSIndexPath).row  + beginIndex] {
             cell.lbDay.text = String(model.day)
             
             
@@ -364,36 +364,36 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             {
                 cell.lbLunaryDay.text = model.solarTermText
                 //cell.lbLunaryDay.backgroundColor = UIColor.orangeColor()
-                cell.lbLunaryDay.textColor = UIColor.orangeColor()
+                cell.lbLunaryDay.textColor = UIColor.orange
             }
             else
             {
                 cell.lbLunaryDay.text = model.lunarDay
-                cell.lbLunaryDay.textColor = UIColor.grayColor()
+                cell.lbLunaryDay.textColor = UIColor.gray
             }
             
             if(model.isToday)
             {
                 //因为我一次绑定三页，如果section等于第1页的时候有currentToday就把第二页的格给设定值了
                 //所以先要判断只有第二页的时候才能够出现today
-                if indexPath.section == 1 {
+                if (indexPath as NSIndexPath).section == 1 {
                     currentTodayCell = cell
                 }
                 
-                cell.lbDay.textColor = UIColor.whiteColor()
-                cell.lbDay.backgroundColor = UIColor.orangeColor()
+                cell.lbDay.textColor = UIColor.white
+                cell.lbDay.backgroundColor = UIColor.orange
                 print(cell.lbDay.text)
             }
             else if(model.isSelected && !model.isToday && selectedDay == model.day)
             {
                 currentSelectedDayCell = cell
-                cell.lbDay.textColor = UIColor.whiteColor()
-                cell.lbDay.backgroundColor = UIColor.lightGrayColor()
+                cell.lbDay.textColor = UIColor.white
+                cell.lbDay.backgroundColor = UIColor.lightGray
                 //print(cell.lbDay.text)
             }
             else
             {
-                cell.lbDay.backgroundColor = UIColor.whiteColor()
+                cell.lbDay.backgroundColor = UIColor.white
                 cell.lbDay.textColor = dayTextColorNormal
             }
             
@@ -410,27 +410,27 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         self.calculateDateBasedOnScrollViewPosition(scrollView)
     }
     
-    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         self.calculateDateBasedOnScrollViewPosition(scrollView)
     }
     
     
-    func calculateDateBasedOnScrollViewPosition(scrollView: UIScrollView) {
+    func calculateDateBasedOnScrollViewPosition(_ scrollView: UIScrollView) {
         
         let cvbounds = self.cv.bounds
         
         let rotateDirection = ApplicationResource.sharedInstance.getMonthViewRotateDirection()
         
         var page = Int(floor(self.cv.contentOffset.x / cvbounds.size.width))
-        if rotateDirection != .Horizontal
+        if rotateDirection != .horizontal
         {
             page = Int(floor(self.cv.contentOffset.y / cvbounds.size.height))
         }
@@ -449,7 +449,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             cv.reloadData()
             loadTitle()
         }
-        if rotateDirection == .Horizontal {
+        if rotateDirection == .horizontal {
             cv.contentOffset.x = cv.frame.size.width
         }
         else

@@ -11,25 +11,25 @@ import UIKit
 
 class MonthSource: NSObject {
     
-    private var today : NSDate
+    fileprivate var today : Date
     
-    private let currentDay : Int
-    private let currentMonth : Int
-    private let currentYear : Int
+    fileprivate let currentDay : Int
+    fileprivate let currentMonth : Int
+    fileprivate let currentYear : Int
     
-    lazy var calendar : NSCalendar = {
+    lazy var calendar : Calendar = {
         
         //let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
         
         //cal.timeZone = NSTimeZone(abbreviation: "UTC")!
-        let cal = NSCalendar.currentCalendar()
+        let cal = Calendar.current
         return cal
     }()
     
     
-    override init() {
+    init(date:Date) {
         
-        today = NSDate()
+        today = date
         currentDay = today.day
         currentYear = today.year
         currentMonth = today.month
@@ -37,14 +37,14 @@ class MonthSource: NSObject {
         super.init()
     }
     
-    func buildOneMonthSource(date: NSDate) -> Array<DayModel!> {
+    func buildOneMonthSource(_ date: Date) -> Array<DayModel?> {
         var source = Array<DayModel!>()
         
         let initialDay = date.day
         let initialYear = date.year
         let initialMonth = date.month
-        let firstDate = NSDate(year: initialYear, month: initialMonth, day: 1)
-        let firstLunarDate = LunarDate(date: firstDate)
+        let firstDate = Date(year: initialYear, month: initialMonth, day: 1)
+        let firstLunarDate = LunarDate(paramDate: firstDate)
         
         //本月阳历1号所在的阴历月是几号，本月1号所在的阴历月一共多少天
         var numberOfLunarDaysInMonth = 0
@@ -73,7 +73,7 @@ class MonthSource: NSObject {
             offsetDay = 1 - dayOfWeek;
         }
         
-        let firstEraDayIn42 = LunarSolarTerm(date: firstDate.plusDays(offsetDay))
+        let firstEraDayIn42 = LunarSolarTerm(paramDate: firstDate.plusDays(offsetDay))
         let firstEraIndexIn42 = firstEraDayIn42.getChineseEraOfDay()
         let pairSolarTerm = firstEraDayIn42.getSolarTerm(date.year, month: date.month)
         var dicSolarTerm : Dictionary<String,String> = Dictionary<String,String>()
@@ -81,7 +81,7 @@ class MonthSource: NSObject {
         dicSolarTerm[pairSolarTerm.solarTerm2.solarTermDate.toFormatString("yyyy-M-d")] = pairSolarTerm.solarTerm2.name
         
         
-        let numberOfDaysInMonth = calendar.rangeOfUnit(.Day, inUnit: .Month, forDate: firstDate).length
+        let numberOfDaysInMonth = (calendar as NSCalendar).range(of: .day, in: .month, for: firstDate).length
         
         //offsetDay 是计算出周日是不是在42个格里的头一个，
         //如果不是从当前日期往前挪几个格式月日历的星期日
@@ -109,7 +109,7 @@ class MonthSource: NSObject {
                 //农历已经到了下个月，从新计算转天农历所在的月有多少天
                 if lunarIndex > numberOfLunarDaysInMonth && lunarNextMonthDate == nil{
                     
-                    lunarNextMonthDate = LunarDate(date: firstDate.plusDays(itemIndex - absOffset))
+                    lunarNextMonthDate = LunarDate(paramDate: firstDate.plusDays(itemIndex - absOffset))
                     
                     if lunarNextMonthDate.isLeapMonth {
                         numberOfLunarDaysInMonth = firstLunarDate.getChineseLeapMonthDays(lunarNextMonthDate.lunarYear)
@@ -170,7 +170,7 @@ class MonthSource: NSObject {
         return source
     }
     
-    func getEraDayIndex(eraIndex: Int, offset: Int) -> Int {
+    func getEraDayIndex(_ eraIndex: Int, offset: Int) -> Int {
         if (eraIndex + offset) < 0
         {
             var value = eraIndex + offset;

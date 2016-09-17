@@ -15,13 +15,13 @@ class MonthController: UIViewController , UIScrollViewDelegate{
     var _rView: UIView!
     
     enum ScrollState : Int{
-        case Current = 0
-        case ToLeft = 1
-        case ToRight = 2
+        case current = 0
+        case toLeft = 1
+        case toRight = 2
     }
 
     let VELOCITY_STANDAD : CGFloat = 0.6
-    var scrollState = ScrollState.Current
+    var scrollState = ScrollState.current
     var scrollBeginOffset : CGFloat = 0
   
     
@@ -41,51 +41,51 @@ class MonthController: UIViewController , UIScrollViewDelegate{
         
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.scrollBeginOffset = scrollView.contentOffset.x
-        self.scrollState = .Current
+        self.scrollState = .current
     }
     
-    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
-        var point = targetContentOffset.memory
+        var point = targetContentOffset.pointee
         
         if(velocity.x > VELOCITY_STANDAD)
         {
-            self.scrollState = .ToRight
+            self.scrollState = .toRight
         }
         
         if(velocity.x < -VELOCITY_STANDAD){
-            self.scrollState = .ToLeft
+            self.scrollState = .toLeft
         }
         
         let scrollDistance = self.scrollBeginOffset - scrollView.contentOffset.x
         let standardDistance = _scrollView.frame.size.width/3
         
         if scrollDistance < -standardDistance {
-            self.scrollState = .ToRight
+            self.scrollState = .toRight
         }
         
         if scrollDistance > standardDistance
         {
-            self.scrollState = .ToLeft
+            self.scrollState = .toLeft
         }
         
-        if(self.scrollState == .ToLeft)
+        if(self.scrollState == .toLeft)
         {
-            _scrollView.setContentOffset(CGPointMake(0, 0), animated: true)
+            _scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             
             point.x = 0
         }
         
-        if(self.scrollState == .ToRight)
+        if(self.scrollState == .toRight)
         {
-            _scrollView.setContentOffset(CGPointMake(scrollView.frame.size.width * 2, 0), animated: true)
+            _scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * 2, y: 0), animated: true)
             
             point.x = scrollView.frame.size.width * 2
         }
         
-        targetContentOffset.memory = point
+        targetContentOffset.pointee = point
     }
     
     
@@ -93,10 +93,10 @@ class MonthController: UIViewController , UIScrollViewDelegate{
 //        _scrollView.userInteractionEnabled = false
 //    }
 //    
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if(scrollView.contentOffset.x == 0)
         {
-            _scrollView.contentOffset = CGPointMake(scrollView.frame.size.width, 0)
+            _scrollView.contentOffset = CGPoint(x: scrollView.frame.size.width, y: 0)
         }
         else if(scrollView.contentOffset.x == scrollView.frame.size.width)
         {
@@ -104,7 +104,7 @@ class MonthController: UIViewController , UIScrollViewDelegate{
         }
         else if(scrollView.contentOffset.x == scrollView.frame.size.width * 2)
         {
-            _scrollView.contentOffset = CGPointMake(scrollView.frame.size.width, 0)
+            _scrollView.contentOffset = CGPoint(x: scrollView.frame.size.width, y: 0)
         }
         
         //scrollView.userInteractionEnabled = true;
@@ -116,20 +116,20 @@ class MonthController: UIViewController , UIScrollViewDelegate{
         let height = _scrollView.frame.size.height
 
         
-        _scrollView.contentSize = CGSizeMake(3 * width, 0)
-        _scrollView.contentOffset = CGPointMake(width, 0)
+        _scrollView.contentSize = CGSize(width: 3 * width, height: 0)
+        _scrollView.contentOffset = CGPoint(x: width, y: 0)
         
         
-        _lView = UIView.init(frame: CGRectMake(0, 0, width, height))
-        _lView.backgroundColor = UIColor.redColor()
+        _lView = UIView.init(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        _lView.backgroundColor = UIColor.red
         _scrollView.addSubview(_lView)
         
-        _mView = UIView.init(frame: CGRectMake(width, 0, width, height))
-        _mView.backgroundColor = UIColor.yellowColor()
+        _mView = UIView.init(frame: CGRect(x: width, y: 0, width: width, height: height))
+        _mView.backgroundColor = UIColor.yellow
         _scrollView.addSubview(_mView)
         
-        _rView = UIView.init(frame: CGRectMake(width*2, 0, width, height))
-        _rView.backgroundColor = UIColor.blueColor()
+        _rView = UIView.init(frame: CGRect(x: width*2, y: 0, width: width, height: height))
+        _rView.backgroundColor = UIColor.blue
         _scrollView.addSubview(_rView)
     }
 
