@@ -18,6 +18,18 @@ class DateSelectController: UIViewController {
     
     @IBOutlet weak var timePicker: UIDatePicker!
     
+    @IBOutlet weak var niRotateItem: UIBarButtonItem!
+    @IBAction func niRotateDirection(sender: AnyObject) {
+        if ApplicationResource.sharedInstance.getMonthViewRotateDirection() == .Horizontal {
+            ApplicationResource.sharedInstance.setMonthViewRotateDirection(.Vertical)
+            niRotateItem.title = "纵向"
+        }
+        else
+        {
+            ApplicationResource.sharedInstance.setMonthViewRotateDirection(.Horizontal)
+            niRotateItem.title = "横向"
+        }
+    }
     var selectedDate : NSDate!
     
     let highLightColorBtn = UIColor.orangeColor()
@@ -29,6 +41,15 @@ class DateSelectController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        if ApplicationResource.sharedInstance.getMonthViewRotateDirection() == .Horizontal {
+            niRotateItem.title = "横向"
+        }
+        else
+        {
+            niRotateItem.title = "纵向"
+        }
+        
+        
         let nsLocal = NSLocale.init(localeIdentifier: "zh_CN")
         
         datePicker.date = selectedDate

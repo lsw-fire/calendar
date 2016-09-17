@@ -34,7 +34,6 @@ class MonthViewLayout: UICollectionViewFlowLayout {
         
     }
     
-    
     func applyLayoutAttributes(attributes : UICollectionViewLayoutAttributes) {
         
         if attributes.representedElementKind != nil {
@@ -43,7 +42,7 @@ class MonthViewLayout: UICollectionViewFlowLayout {
         
         if let collectionView = self.collectionView {
             
-            let direction = ApplicationResource.sharedInstance.getMonthViewRotateDirection()
+            //let direction = ApplicationResource.sharedInstance.getMonthViewRotateDirection()
             
             let stride = (self.scrollDirection == .Horizontal) ? collectionView.frame.size.width : collectionView.frame.size.height
             

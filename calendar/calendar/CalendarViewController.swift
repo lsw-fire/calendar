@@ -26,8 +26,6 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         loadTitle()
     }
     
-    let rotateDirection = ApplicationResource.sharedInstance.getMonthViewRotateDirection()
-    
     
     func goToDateSelectController()
     {
@@ -188,6 +186,9 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         source = getSource(currentMonthDate)
         
         let layout = MonthViewLayout()
+        
+        let rotateDirection = ApplicationResource.sharedInstance.getMonthViewRotateDirection()
+        
         layout.scrollDirection = rotateDirection
         //layout.scrollDirection = .Horizontal
         layout.minimumInteritemSpacing = 0
@@ -236,8 +237,8 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         }
         
         let layer = CALayer()
-        let height = cv.frame.size.height + cvHeader.frame.size.height + 10
-        let width = cv.frame.size.width+10
+        let height = cv.frame.size.height + cvHeader.frame.size.height+0.5
+        let width = cv.frame.size.width + 0.5
         layer.frame = CGRectMake(CGFloat(0), CGFloat(0), width, height)
         layer.borderColor = UIColor.orangeColor().CGColor
         layer.borderWidth = 1
@@ -347,13 +348,10 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         let cell: DayColletionViewCell  = collectionView.dequeueReusableCellWithReuseIdentifier("defaultCell", forIndexPath: indexPath) as! DayColletionViewCell
         
         cell.backgroundColor = UIColor.whiteColor()
+        cell.layer.borderWidth = 0.5
+        cell.layer.borderColor = UIColor.orangeColor().CGColor
         
         let beginIndex = indexPath.section == 0 ? 0 : (42 * indexPath.section)
-        //
-        //        let currentRow = indexPath.item/7
-        //        if currentRow < 5 {
-        //            cell.layer.addSublayer(createLayerBottomBorder(cell.frame.size.height-1))
-        //
         
         cell.lbDay.backgroundColor = UIColor.whiteColor()
         let selectedDay = currentMonthDate.day
@@ -428,6 +426,8 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     func calculateDateBasedOnScrollViewPosition(scrollView: UIScrollView) {
         
         let cvbounds = self.cv.bounds
+        
+        let rotateDirection = ApplicationResource.sharedInstance.getMonthViewRotateDirection()
         
         var page = Int(floor(self.cv.contentOffset.x / cvbounds.size.width))
         if rotateDirection != .Horizontal
