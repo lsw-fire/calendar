@@ -130,12 +130,19 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         super.viewDidDisappear(animated)
         
         self.navigationController?.isNavigationBarHidden = true
+      
+
         
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
+        
+//        let backBarButtonItem = UIBarButtonItem()
+//        backBarButtonItem.title = ""
+//        self.navigationItem.backBarButtonItem = backBarButtonItem
+        
     }
     
     func loadTitle()  {
@@ -158,7 +165,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         lbCTime.attributedText = ColorText.getColorEraText(eraT.c, terrestial: "")
         lbTTime.attributedText = ColorText.getColorEraText("", terrestial: eraT.t)
         
-        let lunarText = lunarST.lunarYearText+"\n"+lunarST.lunarMonthText+"月"+lunarST.lunarDayText
+        let lunarText = lunarST.lunarYearText+"年\n"+lunarST.lunarMonthText+"月"+lunarST.lunarDayText
         lbLunarDate.text = lunarText
         
         let solarTerm = lunarST.getSolarTerm(currentMonthDate.year, month: currentMonthDate.month)
@@ -439,15 +446,17 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         
         if page == 2 {
             currentMonthDate = currentMonthDate.plusMonths(1)
+            loadTitle()
             source = getSource(currentMonthDate)
             cv.reloadData()
-            loadTitle()
+            
         }
         if page == 0 {
             currentMonthDate = currentMonthDate.plusMonths(-1)
+            loadTitle()
             source = getSource(currentMonthDate)
             cv.reloadData()
-            loadTitle()
+            
         }
         if rotateDirection == .horizontal {
             cv.contentOffset.x = cv.frame.size.width

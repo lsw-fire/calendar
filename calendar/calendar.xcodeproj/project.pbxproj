@@ -20,6 +20,7 @@
 		194E8DC41D81125C001B6BC0 /* LunarDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194E8DC31D81125C001B6BC0 /* LunarDate.swift */; };
 		194E8DC61D824A97001B6BC0 /* LunarSolarTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194E8DC51D824A97001B6BC0 /* LunarSolarTerm.swift */; };
 		196EA0CB1D8677C700D38822 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 196EA0C91D8677C700D38822 /* Main.storyboard */; };
+		199FD5C61D8EBB7C005A4980 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199FD5C51D8EBB7C005A4980 /* SettingViewController.swift */; };
 		19A892BF1D770AF8001C7B9E /* MonthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A892BE1D770AF8001C7B9E /* MonthController.swift */; };
 		19D2C6CC1D82D9E2001F0565 /* MonthSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D2C6CB1D82D9E2001F0565 /* MonthSource.swift */; };
 		D7A779471BFD8ED500DB7B88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A779461BFD8ED500DB7B88 /* AppDelegate.swift */; };
@@ -61,6 +62,7 @@
 		194E8DC31D81125C001B6BC0 /* LunarDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarDate.swift; sourceTree = "<group>"; };
 		194E8DC51D824A97001B6BC0 /* LunarSolarTerm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarSolarTerm.swift; sourceTree = "<group>"; };
 		196EA0CA1D8677C700D38822 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = calendar/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		199FD5C51D8EBB7C005A4980 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		19A892BE1D770AF8001C7B9E /* MonthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthController.swift; sourceTree = "<group>"; };
 		19D2C6CB1D82D9E2001F0565 /* MonthSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthSource.swift; sourceTree = "<group>"; };
 		D7A779431BFD8ED500DB7B88 /* calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +177,7 @@
 				D7A7794F1BFD8ED500DB7B88 /* LaunchScreen.storyboard */,
 				D7A779521BFD8ED500DB7B88 /* Info.plist */,
 				19A892BE1D770AF8001C7B9E /* MonthController.swift */,
+				199FD5C51D8EBB7C005A4980 /* SettingViewController.swift */,
 				191AF0851D7A847200F794F1 /* CalendarViewController.swift */,
 				194C74C61D8653C10091E302 /* DateSelectController.swift */,
 			);
@@ -337,6 +340,7 @@
 				194C74C31D843D510091E302 /* ApplicationResource.swift in Sources */,
 				194C2D3F1D7D8E65006F4F2C /* DayModel.swift in Sources */,
 				194C74C51D846C680091E302 /* ColorText.swift in Sources */,
+				199FD5C61D8EBB7C005A4980 /* SettingViewController.swift in Sources */,
 				194E8DC21D7FF778001B6BC0 /* NSDateExtension.swift in Sources */,
 				194E8DC61D824A97001B6BC0 /* LunarSolarTerm.swift in Sources */,
 				194E8DC41D81125C001B6BC0 /* LunarDate.swift in Sources */,

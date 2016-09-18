@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DateSelectController: UIViewController {
+class DateSelectController: UIViewController, UIPopoverPresentationControllerDelegate  {
 
    
     @IBOutlet weak var btnDate: UIButton!
@@ -20,16 +20,38 @@ class DateSelectController: UIViewController {
     
     @IBOutlet weak var niRotateItem: UIBarButtonItem!
     @IBAction func niRotateDirection(_ sender: AnyObject) {
-        if ApplicationResource.sharedInstance.getMonthViewRotateDirection() == .horizontal {
-            ApplicationResource.sharedInstance.setMonthViewRotateDirection(.vertical)
-            niRotateItem.title = "纵向"
-        }
-        else
-        {
-            ApplicationResource.sharedInstance.setMonthViewRotateDirection(.horizontal)
-            niRotateItem.title = "横向"
-        }
+        
+        let settingViewController = self.storyboard!.instantiateViewController(withIdentifier: "SettingViewController") as! SettingViewController
+        
+
+        self.navigationController?.pushViewController(settingViewController, animated: true)
+
+        
+//        var popoverContent = (self.storyboard?.instantiateViewController(withIdentifier: "monthViewController"))! as    UIViewController
+//        popoverContent.preferredContentSize = CGSize(width: 100, height: 100)
+//        popoverContent.modalPresentationStyle = .popover
+//        
+//        let popController = popoverContent.popoverPresentationController
+//        popController?.delegate = self
+//        //popController?.sourceView = sender as! UIView
+//        popController?.permittedArrowDirections = .any
+//        popController?.barButtonItem = sender as! UIBarButtonItem
+//        popController?.sourceRect = CGRect(x: 100, y: 100, width: 0, height: 0)
+
+            
+        //var nav = UINavigationController(rootViewController: popoverContent)
+        //nav.modalPresentationStyle = .popover
+        //var popover = nav.popoverPresentationController
+        //
+            //
+        //self.present(popoverContent, animated: true, completion: nil)
     }
+    
+    //popoverPresentationController iphone 上必须重写此方法
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
     var selectedDate : Date!
     
     let highLightColorBtn = UIColor.orange
@@ -41,12 +63,20 @@ class DateSelectController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
+         self.navigationController?.navigationBar.topItem?.title = ""
+        
+        
+        
+//        let item=UIBarButtonItem(title: "分享", style: .plain, target: self, action: nil)
+//        
+//        self.navigationItem.leftBarButtonItem = item
+        
         if ApplicationResource.sharedInstance.getMonthViewRotateDirection() == .horizontal {
-            niRotateItem.title = "横向"
+            //niRotateItem.title = "横向"
         }
         else
         {
-            niRotateItem.title = "纵向"
+            //niRotateItem.title = "纵向"
         }
         
         
@@ -123,5 +153,22 @@ class DateSelectController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+       
+        //self.navigationItem.title = ""
+//        let backBarButtonItem = UIBarButtonItem()
+//        backBarButtonItem.title = ""
+//        self.navigationItem.backBarButtonItem = backBarButtonItem
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.navigationItem.title = "时间"
+    }
 
+    
 }
