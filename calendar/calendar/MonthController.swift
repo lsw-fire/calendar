@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreGraphics
 
 class MonthController: UIViewController , UIScrollViewDelegate{
 
@@ -14,6 +15,20 @@ class MonthController: UIViewController , UIScrollViewDelegate{
     var _mView: UIView!
     var _rView: UIView!
     
+    @IBOutlet weak var btnTest: UIButton!
+    @IBAction func btnTestClick(_ sender: AnyObject, forEvent event: UIEvent) {
+        
+        //let btn = sender as! UIView
+        let touch = event.touches(for: btnTest)?.first
+        let point = touch?.location(in: btnTest)
+        
+        if (sl.path?.contains(point!))!{
+            
+            print("y-lsw")
+        }
+        
+        print(point?.x)
+    }
     enum ScrollState : Int{
         case current = 0
         case toLeft = 1
@@ -27,6 +42,8 @@ class MonthController: UIViewController , UIScrollViewDelegate{
     
     @IBOutlet var _scrollView: UIScrollView!
     
+    let sl = CAShapeLayer()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,7 +54,25 @@ class MonthController: UIViewController , UIScrollViewDelegate{
         
         _scrollView.delegate = self
         
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: 10.5, y: 8.5))
+        bezierPath.addCurve(to: CGPoint(x:40.5,y:8.5), controlPoint1: CGPoint(x:39.5,y:8.5), controlPoint2: CGPoint(x:40.5,y:8.5))
+        bezierPath.addLine(to: CGPoint(x:26.39,y:22.3))
+        bezierPath.addLine(to: CGPoint(x:25.2,y:23.5))
+        bezierPath.addLine(to: CGPoint(x:10.5,y:8.5))
+        //let st = UIColor.black.setStroke()
+        bezierPath.lineWidth = 1
+        bezierPath.stroke()
         
+        sl.frame = btnTest.bounds
+        sl.path = bezierPath.cgPath
+        sl.fillColor = UIColor.red.cgColor
+        //sl.strokeColor = UIColor.gray.cgColor
+        sl.lineWidth = 1
+//        btnTest.layer.masksToBounds = true
+//        btnTest.layer.mask = sl
+        
+        btnTest.layer.addSublayer(sl)
         
     }
     
