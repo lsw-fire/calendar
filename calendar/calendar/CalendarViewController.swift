@@ -65,6 +65,8 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //self.navigationController?.navigationBar.backItem?.title = " "
+        
         cv.dataSource = self;
         cv.delegate = self;
         cv.backgroundColor = UIColor.white
@@ -297,16 +299,20 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         //NSLog("section=%d", section)
         return 42
     }
-    
+ 
+    //不知道为什么选中一天后会从新刷新一部分cell，用这个标识出是不是选中了某一天，如果选中了就不再去更新上一个选中的日子
+    var onSelectOneDay = false
     //选中某一天
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let beginIndex = (indexPath as NSIndexPath).section == 0 ? 0 : (42 * (indexPath as NSIndexPath).section)
+        onSelectOneDay = true
         
-        if let selected = source[(indexPath as NSIndexPath).row + beginIndex]
+        let beginIndex = indexPath.section == 0 ? 0 : (42 * indexPath.section)
+        
+        if let selected = source[indexPath.row + beginIndex]
         {
             
-            let cell: DayColletionViewCell  = collectionView.cellForItem(at: indexPath) as! DayColletionViewCell
+            let cell = collectionView.cellForItem(at: indexPath) as! DayColletionViewCell
             
             if cell != currentSelectedDayCell {
                 
@@ -314,8 +320,6 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
                     beforeSelectedCell.lbDay.backgroundColor = UIColor.white
                     beforeSelectedCell.lbDay.textColor = dayTextColorNormal
                 }
-                
-                
                 
                 if cell != currentTodayCell {
                     
@@ -354,16 +358,18 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         
         let cell: DayColletionViewCell  = collectionView.dequeueReusableCell(withReuseIdentifier: "defaultCell", for: indexPath) as! DayColletionViewCell
         
+        //print(cell.lbDay.text)
+        
         cell.backgroundColor = UIColor.white
         cell.layer.borderWidth = 0.5
         cell.layer.borderColor = UIColor.orange.cgColor
         
-        let beginIndex = (indexPath as NSIndexPath).section == 0 ? 0 : (42 * (indexPath as NSIndexPath).section)
+        let beginIndex = (indexPath as NSIndexPath).section == 0 ? 0 : (42 * indexPath.section)
         
         cell.lbDay.backgroundColor = UIColor.white
         let selectedDay = currentMonthDate.day
         
-        if let model = source[(indexPath as NSIndexPath).row  + beginIndex] {
+        if let model = source[indexPath.row + beginIndex] {
             cell.lbDay.text = String(model.day)
             
             
@@ -383,7 +389,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             {
                 //因为我一次绑定三页，如果section等于第1页的时候有currentToday就把第二页的格给设定值了
                 //所以先要判断只有第二页的时候才能够出现today
-                if (indexPath as NSIndexPath).section == 1 {
+                if indexPath.section == 1 {
                     currentTodayCell = cell
                 }
                 
@@ -393,7 +399,10 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             }
             else if(model.isSelected && !model.isToday && selectedDay == model.day)
             {
-                currentSelectedDayCell = cell
+                if !onSelectOneDay {
+                    currentSelectedDayCell = cell
+                }
+                
                 cell.lbDay.textColor = UIColor.white
                 cell.lbDay.backgroundColor = UIColor.lightGray
                 //print(cell.lbDay.text)
@@ -449,14 +458,14 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             loadTitle()
             source = getSource(currentMonthDate)
             cv.reloadData()
-            
+            onSelectOneDay = false
         }
         if page == 0 {
             currentMonthDate = currentMonthDate.plusMonths(-1)
             loadTitle()
             source = getSource(currentMonthDate)
             cv.reloadData()
-            
+            onSelectOneDay = false
         }
         if rotateDirection == .horizontal {
             cv.contentOffset.x = cv.frame.size.width

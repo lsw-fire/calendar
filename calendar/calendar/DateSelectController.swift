@@ -63,13 +63,16 @@ class DateSelectController: UIViewController, UIPopoverPresentationControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
        
-         self.navigationController?.navigationBar.topItem?.title = ""
+         //self.navigationController?.navigationBar.topItem?.title = ""
+         let bi = UIBarButtonItem(title: " ", style: UIBarButtonItemStyle.plain, target: nil, action:nil)
         
-        
+        self.navigationItem.backBarButtonItem = bi
         
 //        let item=UIBarButtonItem(title: "分享", style: .plain, target: self, action: nil)
 //        
 //        self.navigationItem.leftBarButtonItem = item
+         //self.navigationController?.navigationItem.title = ""
+        self.title = "时间"
         
         if ApplicationResource.sharedInstance.getMonthViewRotateDirection() == .horizontal {
             //niRotateItem.title = "横向"
@@ -164,11 +167,22 @@ class DateSelectController: UIViewController, UIPopoverPresentationControllerDel
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        //self.navigationController?.navigationBar.topItem?.title = ""
+
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.navigationItem.title = "时间"
+       
     }
 
-    
+    override func viewWillAppear(_ animated: Bool) {
+       
+        super.viewWillAppear(animated)
+        
+    }
 }

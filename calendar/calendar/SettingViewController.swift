@@ -20,11 +20,17 @@ class SettingViewController: UIViewController {
         }else{
             sMonthRotation.isOn = false
         }
-         self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationItem.title = "设置"
+         //self.navigationController?.navigationItem.title = ""
+//        let bi = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: self, action: #selector(SettingViewController.backAction))
+//      
+//       self.navigationItem.leftBarButtonItem = bi
+        self.title = "设置"
         // Do any additional setup after loading the view.
     }
     
+    func backAction()  {
+        self.navigationController?.popViewController(animated: true)
+    }
 
 
     override func didReceiveMemoryWarning() {
@@ -42,6 +48,12 @@ class SettingViewController: UIViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        //self.navigationController?.navigationItem.title = "时间"
+    }
+    
     /*
     // MARK: - Navigation
 

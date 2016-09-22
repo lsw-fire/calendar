@@ -46,11 +46,11 @@ class MonthViewLayout: UICollectionViewFlowLayout {
             
             let stride = (self.scrollDirection == .horizontal) ? collectionView.frame.size.width : collectionView.frame.size.height
             
-            let offset = CGFloat((attributes.indexPath as NSIndexPath).section) * stride
+            let offset = CGFloat(attributes.indexPath.section) * stride
             
-            var xCellOffset : CGFloat = CGFloat((attributes.indexPath as NSIndexPath).item % 7) * (self.itemSize.width)
+            var xCellOffset : CGFloat = CGFloat(attributes.indexPath.item % 7) * (self.itemSize.width)
             
-            var yCellOffset : CGFloat = CGFloat((attributes.indexPath as NSIndexPath).item / 7) * (self.itemSize.height)
+            var yCellOffset : CGFloat = CGFloat(attributes.indexPath.item / 7) * (self.itemSize.height)
             
             if(self.scrollDirection == .horizontal) {
                 xCellOffset += offset;

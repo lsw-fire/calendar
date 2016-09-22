@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="78"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8wz-g9-nvH" id="3jB-jy-kHp">
-                                    <frame key="frameInset" width="375" height="77"/>
+                                    <frame key="frameInset" width="375" height="77.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3eK-63-suf">
@@ -182,6 +182,12 @@
                                 <date key="date" timeIntervalSinceReferenceDate="495343327.832968">
                                     <!--2016-09-12 03:22:07 +0000-->
                                 </date>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="-12023211943">
+                                    <!--1620-01-01 10:54:17 +0000-->
+                                </date>
+                                <date key="maximumDate" timeIntervalSinceReferenceDate="1577764800">
+                                    <!--2050-12-31 04:00:00 +0000-->
+                                </date>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="eQa-if-W18"/>
@@ -206,7 +212,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="prO-sR-GlV">
-                        <barButtonItem key="rightBarButtonItem" title="设置" id="kCm-Mi-9S6">
+                        <barButtonItem key="rightBarButtonItem" title="设置" style="plain" id="kCm-Mi-9S6">
                             <connections>
                                 <action selector="niRotateDirection:" destination="mBc-ao-Mqx" id="B2d-TZ-aYB"/>
                             </connections>
@@ -240,7 +246,7 @@
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MRV-kD-Uih">
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日历纵向滚动" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8a-wa-qSD" userLabel="lbMonthRotation">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日历横向滚动" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8a-wa-qSD" userLabel="lbMonthRotation">
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -320,12 +326,12 @@
                         <viewControllerLayoutGuide type="bottom" id="oyO-uW-0ef"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Nyl-aN-agl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="J2d-Ps-dId">
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7VS-Au-H1T" userLabel="cvTop">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="7VS-Au-H1T" userLabel="cvTop">
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Lg4-WR-Stb">
                                                 <subviews>
@@ -350,7 +356,6 @@
                                                 <constraints>
                                                     <constraint firstItem="J8z-ya-Aki" firstAttribute="bottom" secondItem="LOz-cN-oSq" secondAttribute="bottom" id="4Fh-3g-lqG"/>
                                                     <constraint firstItem="J8z-ya-Aki" firstAttribute="top" secondItem="LOz-cN-oSq" secondAttribute="top" id="EeZ-5M-3ZN"/>
-                                                    <constraint firstAttribute="height" constant="30" id="PbI-KS-bL4"/>
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kF6-Yf-vHi" userLabel="CvHeader">
@@ -358,7 +363,7 @@
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="kF6-Yf-vHi" firstAttribute="height" secondItem="Lg4-WR-Stb" secondAttribute="height" multiplier="0.8" id="kqk-J2-W0V"/>
+                                            <constraint firstItem="kF6-Yf-vHi" firstAttribute="height" secondItem="Lg4-WR-Stb" secondAttribute="height" id="kqk-J2-W0V"/>
                                         </constraints>
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="550" placeholderIntrinsicHeight="210" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rbm-7j-Ka0" userLabel="cvContent">
@@ -430,6 +435,7 @@
                                 <constraints>
                                     <constraint firstItem="7VS-Au-H1T" firstAttribute="width" secondItem="J2d-Ps-dId" secondAttribute="width" id="Phc-i4-Vsh"/>
                                     <constraint firstItem="Rbm-7j-Ka0" firstAttribute="width" secondItem="J2d-Ps-dId" secondAttribute="width" id="ili-4v-ETZ"/>
+                                    <constraint firstItem="Rbm-7j-Ka0" firstAttribute="height" secondItem="J8z-ya-Aki" secondAttribute="height" multiplier="12" id="red-8e-Csl"/>
                                 </constraints>
                                 <variation key="heightClass=compact-widthClass=compact">
                                     <mask key="constraints">
@@ -619,7 +625,10 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="Oy3-fl-9To"/>
+                    <navigationItem key="navigationItem" id="Oy3-fl-9To">
+                        <barButtonItem key="backBarButtonItem" title=" " id="GWb-K7-uIg"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="cv" destination="Rbm-7j-Ka0" id="v5e-sy-3wU"/>
                         <outlet property="cvHeader" destination="kF6-Yf-vHi" id="T55-8A-Xca"/>

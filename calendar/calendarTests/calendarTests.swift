@@ -22,7 +22,7 @@ class calendarTests: XCTestCase {
     }
     
     func testMonthSource() {
-        let source = MonthSource(Date())
+        let source = MonthSource(date: Date())
         let result = source.buildOneMonthSource(Date(year: 2017,month: 1,day: 5))
         print(result)
     }
@@ -56,7 +56,7 @@ class calendarTests: XCTestCase {
         dateFormatter.dateFormat = "dd-MM-yyyy"
         let str = dateFormatter.string(from: c)
         
-        var lunarDate = LunarDate(date: c)
+        var lunarDate = LunarDate(paramDate: c)
        
        
         do
@@ -75,7 +75,7 @@ class calendarTests: XCTestCase {
             
             let testDate = Date(year: 1982,month: 12,day: 16, hour: 6, min: 5)
             
-            let st = LunarSolarTerm(date: testDate)
+            let st = LunarSolarTerm(paramDate: testDate)
             
             print(st.getEraYearText())
             print(st.getEraMonthText())
