@@ -39,10 +39,12 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         
         dateSelectController.selectedDate = date
         dateSelectController.dateSelectedAction = { date in
+            self.onSelectOneDay = false
             self.currentMonthDate = date as Date
             self.source = self.getSource(self.currentMonthDate)
             self.cv.reloadData()
             self.loadTitle()
+            
         }
         self.navigationController?.pushViewController(dateSelectController, animated: true)
     }
