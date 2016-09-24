@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="W4s-rT-aRW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xPg-1j-FPJ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="78"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8wz-g9-nvH" id="3jB-jy-kHp">
-                                    <frame key="frameInset" width="375" height="77.5"/>
+                                    <frame key="frameInset" width="375" height="77"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3eK-63-suf">
@@ -83,24 +83,32 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iTr-39-jgq">
                                 <color key="backgroundColor" red="1" green="0.36880232237405475" blue="0.34623339038450496" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="64z-qs-r1K"/>
-                                    <constraint firstAttribute="width" constant="100" id="AYc-AR-znr"/>
+                                    <constraint firstAttribute="height" constant="50" id="64z-qs-r1K"/>
+                                    <constraint firstAttribute="width" constant="200" id="AYc-AR-znr"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="btnTestClick:forEvent:" destination="xPg-1j-FPJ" eventType="touchUpInside" id="1ck-GS-pgz"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Left" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7z-st-B5b">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fze-fd-1Cw" firstAttribute="centerX" secondItem="0oK-jZ-332" secondAttribute="centerX" id="1Pu-P8-4mr"/>
+                            <constraint firstItem="a7z-st-B5b" firstAttribute="width" secondItem="iTr-39-jgq" secondAttribute="width" multiplier="0.5" id="ABQ-LW-Icj"/>
                             <constraint firstItem="iTr-39-jgq" firstAttribute="centerY" secondItem="0oK-jZ-332" secondAttribute="centerY" id="AV3-DA-zx8"/>
+                            <constraint firstItem="a7z-st-B5b" firstAttribute="leading" secondItem="iTr-39-jgq" secondAttribute="leading" id="DwT-jC-nx7"/>
                             <constraint firstItem="iTr-39-jgq" firstAttribute="centerX" secondItem="0oK-jZ-332" secondAttribute="centerX" id="QVk-zA-YaF"/>
                             <constraint firstItem="fze-fd-1Cw" firstAttribute="top" secondItem="Y4P-yS-Ov7" secondAttribute="bottom" id="dv4-y3-zZG"/>
                             <constraint firstItem="fze-fd-1Cw" firstAttribute="centerY" secondItem="0oK-jZ-332" secondAttribute="centerY" id="ePL-Vr-GbY"/>
+                            <constraint firstItem="a7z-st-B5b" firstAttribute="bottom" secondItem="iTr-39-jgq" secondAttribute="bottom" id="gth-wH-BV3"/>
                             <constraint firstItem="fze-fd-1Cw" firstAttribute="centerX" secondItem="0oK-jZ-332" secondAttribute="centerX" id="nlr-Ap-oy1"/>
                             <constraint firstItem="fze-fd-1Cw" firstAttribute="leading" secondItem="0oK-jZ-332" secondAttribute="leading" id="p3s-jr-KAG"/>
+                            <constraint firstItem="a7z-st-B5b" firstAttribute="height" secondItem="iTr-39-jgq" secondAttribute="height" id="wwC-0g-ewg"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
