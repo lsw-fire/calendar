@@ -32,6 +32,24 @@ class MonthController: UIViewController , UIScrollViewDelegate{
             slRight.strokeColor = UIColor.gray.cgColor
             
             print("left-lsw"+(point?.x.description)!)
+            
+            
+            
+            let urlStr = "OpenMemberMaintain://param?date=2016-12-16"
+            
+            let customUrl = URL(string: urlStr)
+            
+            if UIApplication.shared.canOpenURL(customUrl!) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(customUrl!, options: [:], completionHandler: {
+                        (success) in
+                        print("open url")
+                    })
+                } else {
+                    // Fallback on earlier versions
+                }
+            }
+            
         }else if (slRight.path?.contains(point!))!{
             
             slRight.fillColor = UIColor.gray.cgColor

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import core
 
 
 class MonthSource: NSObject {
@@ -53,7 +54,7 @@ class MonthSource: NSObject {
         }
         else
         {
-            numberOfLunarDaysInMonth = firstLunarDate.getChineseMonthDays(firstLunarDate.lunarYear, firstLunarDate.lunarMonth)
+            numberOfLunarDaysInMonth = LunarDate.getChineseMonthDays(firstLunarDate.lunarYear, firstLunarDate.lunarMonth)
         }
         
         //因为一个阳历月要显示42个格，所以农历月的总数量如果没超过42还要继续计算下一个农历月是阳历几号开始的
@@ -75,10 +76,10 @@ class MonthSource: NSObject {
         
         let firstEraDayIn42 = LunarSolarTerm(paramDate: firstDate.plusDays(offsetDay))
         let firstEraIndexIn42 = firstEraDayIn42.getChineseEraOfDay()
-        let pairSolarTerm = firstEraDayIn42.getSolarTerm(date.year, month: date.month)
+        let pairSolarTerm = LunarSolarTerm.getSolarTerm(date.year, month: date.month)
         var dicSolarTerm : Dictionary<String,String> = Dictionary<String,String>()
-        dicSolarTerm[pairSolarTerm.solarTerm1.solarTermDate.toFormatString("yyyy-M-d")] = pairSolarTerm.solarTerm1.name
-        dicSolarTerm[pairSolarTerm.solarTerm2.solarTermDate.toFormatString("yyyy-M-d")] = pairSolarTerm.solarTerm2.name
+        dicSolarTerm[pairSolarTerm.solarTerm1.date.toFormatString("yyyy-M-d")] = pairSolarTerm.solarTerm1.name
+        dicSolarTerm[pairSolarTerm.solarTerm2.date.toFormatString("yyyy-M-d")] = pairSolarTerm.solarTerm2.name
         
         
         let numberOfDaysInMonth = (calendar as NSCalendar).range(of: .day, in: .month, for: firstDate).length
@@ -116,7 +117,7 @@ class MonthSource: NSObject {
                     }
                     else
                     {
-                        numberOfLunarDaysInMonth = firstLunarDate.getChineseMonthDays(lunarNextMonthDate.lunarYear, lunarNextMonthDate.lunarMonth)
+                        numberOfLunarDaysInMonth = LunarDate.getChineseMonthDays(lunarNextMonthDate.lunarYear, lunarNextMonthDate.lunarMonth)
                     }
                     
                     //从新从初一开始新的农历月索引
@@ -125,12 +126,12 @@ class MonthSource: NSObject {
                 }
 
                 
-                let eraTextTuple = firstEraDayIn42.getEraText(eraIndex)
+                let eraTextTuple = LunarSolarTerm.getEraText(eraIndex)
                 
-                var lunarDayText = firstLunarDate.getLunarDayTextByValue(lunarIndex)
+                var lunarDayText = LunarDate.getLunarDayTextByValue(lunarIndex)
                 if lunarDayText == "初一" {
                     //十一月显示有点问题因为是三个字，其他月份都是两个字
-                    lunarDayText = firstLunarDate.getLunarMonthTextByValue(lunarMonthIndex) + "月"
+                    lunarDayText = LunarDate.getLunarMonthTextByValue(lunarMonthIndex) + "月"
                 }
                 
                 lunarIndex += 1

@@ -18,6 +18,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
             let alertMessage = UIAlertController(title: "", message: "", preferredStyle: .alert)
             
             alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            @IBOutlet weak var viewHolder: UIView!
             
             self.present(alertMessage, animated: true, completion:nil);
             

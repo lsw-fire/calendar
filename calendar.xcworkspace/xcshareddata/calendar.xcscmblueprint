@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "BA66F8F43450B22DFB80B4781FD1A23DF9C1B135",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "BA66F8F43450B22DFB80B4781FD1A23DF9C1B135" : 9223372036854775807,
+    "9065EF3F2BD79D88DB184D715EEA8ECFE95BD386" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "20FBA895-798A-4C08-B3F5-0389B0048AE7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "BA66F8F43450B22DFB80B4781FD1A23DF9C1B135" : "calendar\/",
+    "9065EF3F2BD79D88DB184D715EEA8ECFE95BD386" : "calendar\/core\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "calendar",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "calendar.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/lsw-fire\/core.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9065EF3F2BD79D88DB184D715EEA8ECFE95BD386"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/lsw-fire\/calendar.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BA66F8F43450B22DFB80B4781FD1A23DF9C1B135"
+    }
+  ]
+}

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import core
 
 class CalendarViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -172,8 +173,8 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         let lunarText = lunarST.lunarYearText+"年\n"+lunarST.lunarMonthText+"月"+lunarST.lunarDayText
         lbLunarDate.text = lunarText
         
-        let solarTerm = lunarST.getSolarTerm(currentMonthDate.year, month: currentMonthDate.month)
-        lbSolarTermDate.text = solarTerm.solarTerm1.name+" : "+solarTerm.solarTerm1.solarTermDate.toFormatString("d日-HH:mm")+"\n"+solarTerm.solarTerm2.name+" : "+solarTerm.solarTerm2.solarTermDate.toFormatString("d日-HH:mm")
+        let solarTerm = LunarSolarTerm.getSolarTerm(currentMonthDate.year, month: currentMonthDate.month)
+        lbSolarTermDate.text = solarTerm.solarTerm1.name+" : "+solarTerm.solarTerm1.date.toFormatString("d日-HH:mm")+"\n"+solarTerm.solarTerm2.name+" : "+solarTerm.solarTerm2.date.toFormatString("d日-HH:mm")
     }
     
     var currentMonthDate : Date = Date()

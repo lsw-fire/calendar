@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "MonthController.scrollViewWillEndDragging(UIScrollView, withVelocity : CGPoint, targetContentOffset : UnsafeMutablePointer&lt;CGPoint&gt;) -&gt; ():MonthController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "velocity.x">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CalendarViewController.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:CalendarViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "getSource()![indexPath.row]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MonthController.reloadView() -&gt; ():MonthController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.accessibilityFrame.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
