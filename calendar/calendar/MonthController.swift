@@ -35,7 +35,7 @@ class MonthController: UIViewController , UIScrollViewDelegate{
             
             
             
-            let urlStr = "OpenMemberMaintain://param?date=2016-12-16"
+            let urlStr = "OpenMemberMaintain://param?date=" + Date().toFormatString("yyyy-MM-dd-HH:mm")
             
             let customUrl = URL(string: urlStr)
             

@@ -135,8 +135,8 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         super.viewDidDisappear(animated)
         
         self.navigationController?.isNavigationBarHidden = true
-      
-
+        
+        
         
     }
     
@@ -144,9 +144,9 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         super.viewDidDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
         
-//        let backBarButtonItem = UIBarButtonItem()
-//        backBarButtonItem.title = ""
-//        self.navigationItem.backBarButtonItem = backBarButtonItem
+        //        let backBarButtonItem = UIBarButtonItem()
+        //        backBarButtonItem.title = ""
+        //        self.navigationItem.backBarButtonItem = backBarButtonItem
         
     }
     
@@ -302,7 +302,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         //NSLog("section=%d", section)
         return 42
     }
- 
+    
     //不知道为什么选中一天后会从新刷新一部分cell，用这个标识出是不是选中了某一天，如果选中了就不再去更新上一个选中的日子
     var onSelectOneDay = false
     //选中某一天
@@ -477,6 +477,41 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         {
             cv.contentOffset.y = cv.frame.size.height
         }
+    }
+    
+    @IBAction func btnRedirectToBaZiApp(_ sender: AnyObject) {
+        
+        let urlStr = "OpenMemberMaintain://param?date=" + currentMonthDate.toFormatString("yyyy-MM-dd-HH:mm")
+        
+        let customUrl = URL(string: urlStr)
+        
+        if UIApplication.shared.canOpenURL(customUrl!) {
+            
+            UIApplication.shared.open(customUrl!, options: [:], completionHandler: {
+                (success) in
+                print("open url")
+            })
+        }else{
+            UIApplication.shared.open(URL(string:"itms-apps://itunes.apple.com/app/id1166081553")!, options: [:], completionHandler:{ (success) in print("open url") })
+        }
+        
+    }
+    
+    @IBAction func btnRedirectToLiuYaoApp(_ sender: AnyObject) {
+        let urlStr = "OpenHexagramCreate://param?date=" + currentMonthDate.toFormatString("yyyy-MM-dd-HH:mm")
+        
+        let customUrl = URL(string: urlStr)
+        
+        if UIApplication.shared.canOpenURL(customUrl!) {
+            
+            UIApplication.shared.open(customUrl!, options: [:], completionHandler: {
+                (success) in
+                print("open url")
+            })
+        }else{
+            UIApplication.shared.open(URL(string:"itms-apps://itunes.apple.com/app/id1171748650")!, options: [:], completionHandler:{ (success) in print("open url") })
+        }
+
     }
     
     /*
