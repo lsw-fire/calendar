@@ -807,10 +807,10 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="pAl-dJ-3HL"/>
-                                <exclude reference="mwi-ca-cXR"/>
                                 <exclude reference="I1H-Oa-2FB"/>
                                 <exclude reference="MLe-hJ-I4E"/>
                                 <exclude reference="kiD-Hy-auF"/>
+                                <exclude reference="mwi-ca-cXR"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
@@ -818,13 +818,13 @@
                                 <exclude reference="n1D-VF-c9X"/>
                                 <include reference="pAl-dJ-3HL"/>
                                 <exclude reference="sF3-Lp-Bk8"/>
-                                <include reference="mwi-ca-cXR"/>
                                 <exclude reference="8hV-QD-G6D"/>
                                 <include reference="I1H-Oa-2FB"/>
                                 <include reference="MLe-hJ-I4E"/>
                                 <exclude reference="NMX-hy-lcl"/>
                                 <include reference="kiD-Hy-auF"/>
                                 <exclude reference="x6q-UI-iNb"/>
+                                <include reference="mwi-ca-cXR"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=regular">
@@ -832,13 +832,13 @@
                                 <exclude reference="n1D-VF-c9X"/>
                                 <include reference="pAl-dJ-3HL"/>
                                 <exclude reference="sF3-Lp-Bk8"/>
-                                <include reference="mwi-ca-cXR"/>
                                 <exclude reference="8hV-QD-G6D"/>
                                 <include reference="I1H-Oa-2FB"/>
                                 <include reference="MLe-hJ-I4E"/>
                                 <exclude reference="NMX-hy-lcl"/>
                                 <include reference="kiD-Hy-auF"/>
                                 <exclude reference="x6q-UI-iNb"/>
+                                <include reference="mwi-ca-cXR"/>
                             </mask>
                         </variation>
                     </view>

@@ -531,7 +531,7 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = calendar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = lsw.zibai.calendar;
+				PRODUCT_BUNDLE_IDENTIFIER = lsw.trigram.calendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -549,7 +549,7 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = calendar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = lsw.zibai.calendar;
+				PRODUCT_BUNDLE_IDENTIFIER = lsw.trigram.calendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
