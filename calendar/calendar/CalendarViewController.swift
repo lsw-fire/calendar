@@ -27,9 +27,12 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         loadTitle()
     }
     
+    var selectedDateForRevert : Date!
     
     func goToDateSelectController()
     {
+        selectedDateForRevert = Date(date: currentMonthDate)
+        
         let strDate = lbSelectedDateTime.text
         let formatter = DateFormatter()
         formatter.dateFormat = dateFormat
@@ -47,7 +50,22 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             self.loadTitle()
             
         }
-        self.navigationController?.pushViewController(dateSelectController, animated: true)
+        
+        dateSelectController.closeController = {
+            dateSelectController.dismiss(animated: true, completion: nil)
+        }
+        
+        dateSelectController.closeControllerWithUnselected = {
+            self.currentMonthDate = self.selectedDateForRevert
+            //print(self.selectedDateForRevert.toFormatString("yyyy-MM-dd"))
+            self.cv.reloadData()
+            self.loadTitle()
+            dateSelectController.dismiss(animated: true, completion: nil)
+        }
+        
+        dateSelectController.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        self.present(dateSelectController, animated: true, completion: nil)
+        
     }
     
     //var dayModel = DayModel(day: "2")
@@ -113,10 +131,19 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         lbSelectedDateTime.addGestureRecognizer(gesture)
         
         loadTitle()
-        //        lbSelectedDateTime.layer.borderColor = UIColor.lightGrayColor().CGColor
-        //        lbSelectedDateTime.layer.borderWidth = 1
+
+//        for i in 1...20 {
+//            let year = 1930+i
+//            print(year)
+//            let ziBai = ZiBaiGenerator(date: Date(year: year,month: 12,day: 16), isMale: true)
+//            let str = ziBai.calculateSelfTrigram()
+//            print(str)
+//            
+//            let ziBai1 = ZiBaiGenerator(date: Date(year: year,month: 8,day: 7), isMale: false)
+//            let str1 = ziBai1.calculateSelfTrigram()
+//            print(str1)
+//        }
         
-        // Do any additional setup after loading the view.
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -136,17 +163,11 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         
         self.navigationController?.isNavigationBarHidden = true
         
-        
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
-        
-        //        let backBarButtonItem = UIBarButtonItem()
-        //        backBarButtonItem.title = ""
-        //        self.navigationItem.backBarButtonItem = backBarButtonItem
         
     }
     
@@ -479,23 +500,23 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         }
     }
     
-    @IBAction func btnRedirectToBaZiApp(_ sender: AnyObject) {
+    @IBAction func btnSelfTrigramTap(_ sender: Any) {
         
-        let urlStr = "OpenMemberMaintain://param?date=" + currentMonthDate.toFormatString("yyyy-MM-dd-HH:mm")
+//        let trigrams = defaultTrigramList.keys
+//        let my = defaultTrigramList["火"]
+//        for item in trigrams {
+//            let toTrigram = defaultTrigramList[item]!
+//            let name = ZiBaiGenerator.getPositionName(from: my!, to: toTrigram)
+//            
+//            print(toTrigram.name + ":" + name.rawValue)
+//        }
         
-        let customUrl = URL(string: urlStr)
+        let controller = self.navigationController?.storyboard?.instantiateViewController(withIdentifier: "SelfTrigramViewController") as! SelfTrigramViewController
+        controller.selectedDate = currentMonthDate
         
-        if UIApplication.shared.canOpenURL(customUrl!) {
-            
-            UIApplication.shared.open(customUrl!, options: [:], completionHandler: {
-                (success) in
-                print("open url")
-            })
-        }else{
-            UIApplication.shared.open(URL(string:"itms-apps://itunes.apple.com/app/id1166081553")!, options: [:], completionHandler:{ (success) in print("open url") })
-        }
-        
+        self.navigationController?.pushViewController(controller, animated: true)
     }
+    
     
     @IBAction func btnRedirectToLiuYaoApp(_ sender: AnyObject) {
         let urlStr = "OpenHexagramCreate://param?date=" + currentMonthDate.toFormatString("yyyy-MM-dd-HH:mm")

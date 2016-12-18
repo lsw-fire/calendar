@@ -14,6 +14,10 @@
 		192F47761D842013009338A9 /* Source.json in Resources */ = {isa = PBXBuildFile; fileRef = 192F47751D842013009338A9 /* Source.json */; };
 		193E37B11D88073400FD8320 /* LabelTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193E37B01D88073400FD8320 /* LabelTapGestureRecognizer.swift */; };
 		193E37B31D8815B400FD8320 /* MonthViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193E37B21D8815B400FD8320 /* MonthViewLayout.swift */; };
+		1942D7FF1E066463000CC49B /* TrigramViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1942D7FE1E066463000CC49B /* TrigramViewCell.swift */; };
+		1942D8011E0673BE000CC49B /* TrigramViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1942D8001E0673BE000CC49B /* TrigramViewContainer.swift */; };
+		1942D8031E067429000CC49B /* TrigramViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1942D8021E067429000CC49B /* TrigramViewCell.xib */; };
+		1942D8051E06A540000CC49B /* SelfTrigramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1942D8041E06A540000CC49B /* SelfTrigramViewController.swift */; };
 		194C2D3F1D7D8E65006F4F2C /* DayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C2D3E1D7D8E65006F4F2C /* DayModel.swift */; };
 		194C74C31D843D510091E302 /* ApplicationResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C74C21D843D510091E302 /* ApplicationResource.swift */; };
 		194C74C51D846C680091E302 /* ColorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C74C41D846C680091E302 /* ColorText.swift */; };
@@ -68,6 +72,10 @@
 		192F47751D842013009338A9 /* Source.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Source.json; sourceTree = "<group>"; };
 		193E37B01D88073400FD8320 /* LabelTapGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelTapGestureRecognizer.swift; sourceTree = "<group>"; };
 		193E37B21D8815B400FD8320 /* MonthViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthViewLayout.swift; sourceTree = "<group>"; };
+		1942D7FE1E066463000CC49B /* TrigramViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrigramViewCell.swift; sourceTree = "<group>"; };
+		1942D8001E0673BE000CC49B /* TrigramViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrigramViewContainer.swift; sourceTree = "<group>"; };
+		1942D8021E067429000CC49B /* TrigramViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrigramViewCell.xib; sourceTree = "<group>"; };
+		1942D8041E06A540000CC49B /* SelfTrigramViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfTrigramViewController.swift; sourceTree = "<group>"; };
 		194C2D3E1D7D8E65006F4F2C /* DayModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayModel.swift; sourceTree = "<group>"; };
 		194C74C21D843D510091E302 /* ApplicationResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationResource.swift; sourceTree = "<group>"; };
 		194C74C41D846C680091E302 /* ColorText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorText.swift; sourceTree = "<group>"; };
@@ -190,6 +198,10 @@
 				199FD5C51D8EBB7C005A4980 /* SettingViewController.swift */,
 				191AF0851D7A847200F794F1 /* CalendarViewController.swift */,
 				194C74C61D8653C10091E302 /* DateSelectController.swift */,
+				1942D8041E06A540000CC49B /* SelfTrigramViewController.swift */,
+				1942D8021E067429000CC49B /* TrigramViewCell.xib */,
+				1942D7FE1E066463000CC49B /* TrigramViewCell.swift */,
+				1942D8001E0673BE000CC49B /* TrigramViewContainer.swift */,
 			);
 			path = calendar;
 			sourceTree = "<group>";
@@ -282,7 +294,7 @@
 						CreatedOnToolsVersion = 7.0.1;
 						DevelopmentTeam = 8K4FDLBP8T;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					D7A779561BFD8ED500DB7B88 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -324,6 +336,7 @@
 				192F47761D842013009338A9 /* Source.json in Resources */,
 				D7A779511BFD8ED500DB7B88 /* LaunchScreen.storyboard in Resources */,
 				D7A7794E1BFD8ED500DB7B88 /* Assets.xcassets in Resources */,
+				1942D8031E067429000CC49B /* TrigramViewCell.xib in Resources */,
 				196EA0CB1D8677C700D38822 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				194C74C31D843D510091E302 /* ApplicationResource.swift in Sources */,
+				1942D8011E0673BE000CC49B /* TrigramViewContainer.swift in Sources */,
 				194C2D3F1D7D8E65006F4F2C /* DayModel.swift in Sources */,
 				194C74C51D846C680091E302 /* ColorText.swift in Sources */,
 				199FD5C61D8EBB7C005A4980 /* SettingViewController.swift in Sources */,
@@ -357,7 +371,9 @@
 				191AF0861D7A847200F794F1 /* CalendarViewController.swift in Sources */,
 				194C74C71D8653C10091E302 /* DateSelectController.swift in Sources */,
 				191AF0881D7A90E900F794F1 /* DayColletionViewCell.swift in Sources */,
+				1942D8051E06A540000CC49B /* SelfTrigramViewController.swift in Sources */,
 				19A892BF1D770AF8001C7B9E /* MonthController.swift in Sources */,
+				1942D7FF1E066463000CC49B /* TrigramViewCell.swift in Sources */,
 				193E37B31D8815B400FD8320 /* MonthViewLayout.swift in Sources */,
 				D7A779491BFD8ED500DB7B88 /* ViewController.swift in Sources */,
 				D7A779471BFD8ED500DB7B88 /* AppDelegate.swift in Sources */,
@@ -511,14 +527,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shi Wei Li (8K4FDLBP8T)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 8K4FDLBP8T;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = calendar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = lsw.lunar.calendar;
+				PRODUCT_BUNDLE_IDENTIFIER = lsw.zibai.calendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "64957287-d4f8-4367-aded-a1c5f2b2a0fa";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: lsw.lunar.calendar";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -529,14 +545,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shi Wei Li (8K4FDLBP8T)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 8K4FDLBP8T;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = calendar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = lsw.lunar.calendar;
+				PRODUCT_BUNDLE_IDENTIFIER = lsw.zibai.calendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "64957287-d4f8-4367-aded-a1c5f2b2a0fa";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: lsw.lunar.calendar";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
