@@ -366,6 +366,13 @@
                                     <constraint firstAttribute="width" secondItem="FVg-oL-PVt" secondAttribute="height" multiplier="1:1" id="Byn-ax-roc"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIi-gc-SJ1">
+                                <rect key="frame" x="138" y="595" width="138" height="30"/>
+                                <state key="normal" title="选定(本命卦)"/>
+                                <connections>
+                                    <action selector="btnSelectSelfTrigramTap:" destination="T8n-0k-89B" eventType="touchUpInside" id="qWJ-s2-K45"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -377,6 +384,9 @@
                             </constraint>
                             <constraint firstItem="aaK-ft-L9S" firstAttribute="leading" secondItem="g4g-ah-fV6" secondAttribute="leadingMargin" id="XZL-NN-IEf"/>
                             <constraint firstItem="mQb-qN-Bfg" firstAttribute="top" secondItem="FVg-oL-PVt" secondAttribute="bottom" constant="10" id="Y7K-qU-Ug9"/>
+                            <constraint firstItem="OIi-gc-SJ1" firstAttribute="top" secondItem="FVg-oL-PVt" secondAttribute="bottom" constant="20" id="akJ-pi-vRD"/>
+                            <constraint firstItem="OIi-gc-SJ1" firstAttribute="width" secondItem="g4g-ah-fV6" secondAttribute="width" multiplier="1:3" id="aqK-Hf-eUL"/>
+                            <constraint firstItem="OIi-gc-SJ1" firstAttribute="centerX" secondItem="g4g-ah-fV6" secondAttribute="centerX" id="hsq-SY-FUb"/>
                             <constraint firstItem="aaK-ft-L9S" firstAttribute="top" secondItem="2F7-Zn-rth" secondAttribute="bottom" id="uT1-o3-sog"/>
                             <constraint firstItem="FVg-oL-PVt" firstAttribute="centerX" secondItem="g4g-ah-fV6" secondAttribute="centerX" id="xeX-bu-xoK"/>
                             <constraint firstItem="FVg-oL-PVt" firstAttribute="width" secondItem="g4g-ah-fV6" secondAttribute="width" id="yji-ao-dmr"/>
@@ -408,6 +418,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="btnSelectSelfTrigram" destination="OIi-gc-SJ1" id="xXC-Yp-Tle"/>
                         <outlet property="lbDateSelected" destination="eTN-0v-mkb" id="YFw-gN-FEw"/>
                         <outlet property="scGender" destination="qCJ-GU-gNM" id="Dia-0v-FfO"/>
                         <outlet property="selfTrigramView" destination="FVg-oL-PVt" id="Ayk-jO-Zem"/>
@@ -465,7 +476,7 @@
         <!--Calendar View Controller-->
         <scene sceneID="0SK-ta-k8w">
             <objects>
-                <viewController id="qeP-6C-whW" customClass="CalendarViewController" customModule="calendar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarViewController" id="qeP-6C-whW" customClass="CalendarViewController" customModule="calendar" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HbU-cG-GQB"/>
                         <viewControllerLayoutGuide type="bottom" id="oyO-uW-0ef"/>

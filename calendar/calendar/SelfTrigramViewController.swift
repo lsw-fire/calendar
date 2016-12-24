@@ -15,6 +15,7 @@ class SelfTrigramViewController: UIViewController {
     @IBOutlet weak var lbDateSelected: UILabel!
     @IBOutlet weak var selfTrigramView: TrigramViewContainer!
     
+    @IBOutlet weak var btnSelectSelfTrigram: UIButton!
     var selectedDate: Date!
     var isMale = true
     
@@ -34,7 +35,18 @@ class SelfTrigramViewController: UIViewController {
         
         self.view.tintColor = UIColor.orange
         self.title = "本命卦"
+        
+        let appInstance = UIApplication.shared.delegate as! AppDelegate
+        if !appInstance.fromApp.isEmpty && appInstance.fromApp == "fengshui"{
+            btnSelectSelfTrigram.isHidden = false
+            Button.setStyleFor(button: btnSelectSelfTrigram)
+        }else{
+            btnSelectSelfTrigram.isHidden = true
+        }
+        
     }
+    
+    var selfTrigramParam : String = ""
     
     func loadContent() {
         let ziBai = ZiBaiGenerator(date: selectedDate, isMale: isMale)
@@ -43,6 +55,7 @@ class SelfTrigramViewController: UIViewController {
         for i in 0..<selfTrigramView.cells.count {
             selfTrigramView.cells[i].trigramName = defaultTrigrams[i]
             
+            self.selfTrigramParam = (selfTrigram?.0)!
             let selfTrigramName = selfTrigram?.0
             let d = defaultTrigramList[trigramsMapping[selfTrigramName!]!]
             if !defaultTrigrams[i].isEmpty {
@@ -80,6 +93,25 @@ class SelfTrigramViewController: UIViewController {
         loadContent()
     }
     
+    @IBAction func btnSelectSelfTrigramTap(_ sender: Any) {
+        
+        let index=trigramNamesArray.index(of: selfTrigramParam)
+        
+        let urlStr = "OpenFengShuiSelfTrigram://param?selfTrigram=" + (index?.description)!
+        
+        let customUrl = URL(string: urlStr)
+        
+        if UIApplication.shared.canOpenURL(customUrl!) {
+            
+            UIApplication.shared.open(customUrl!, options: [:], completionHandler: {
+                (success) in
+                print("open url")
+            })
+        }else{
+//            UIApplication.shared.open(URL(string:"itms-apps://itunes.apple.com/app/id1187716151")!, options: [:], completionHandler:{ (success) in print("open url") })
+        }
+
+    }
     /*
      // MARK: - Navigation
      

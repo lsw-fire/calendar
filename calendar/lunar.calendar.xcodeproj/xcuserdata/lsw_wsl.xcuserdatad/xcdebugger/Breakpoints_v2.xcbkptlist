@@ -225,38 +225,6 @@
             endingLineNumber = "44"
             landmarkName = "btnTestClick(_:forEvent:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "calendar.MonthController.btnTestClick (Swift.AnyObject, forEvent : __ObjC.UIEvent) -&gt; ()"
-                  moduleName = "calendar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lsw_wsl/Desktop/Github/calendar/calendar/calendar/MonthController.swift"
-                  timestampString = "503691935.211822"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "3647">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "calendar.MonthController.(btnTestClick (Swift.AnyObject, forEvent : __ObjC.UIEvent) -&gt; ()).(closure #1)"
-                  moduleName = "calendar"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lsw_wsl/Desktop/Github/calendar/calendar/calendar/MonthController.swift"
-                  timestampString = "503691935.213273"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "21">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
