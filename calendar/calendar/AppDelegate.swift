@@ -42,17 +42,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if dic.keys.contains("from") {
                 let from = dic["from"]!
                 fromApp = from
-                print(fromApp)
+                //print(fromApp)
             }
             
             let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
             
             let vc = storyBoard.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController
             
+            var nowDate : Date!
+            if dic.keys.contains("date") {
+                let date = dic["date"]!
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyyMMdd"
+                let currentTime = formatter.date(from: date)
+                nowDate = currentTime!
+                vc.currentMonthDate = nowDate
+            }
+            
             if let nav = self.window?.rootViewController as? UINavigationController{
                 //nav.pushViewController(vc, animated: true)
                 if nav.viewControllers.count > 0 {
-                    nav.popToViewController(nav.viewControllers[0], animated: true)
+                    
+                    let controller = nav.viewControllers[0]
+                    if controller is CalendarViewController {
+                        let c = controller as! CalendarViewController
+                        if let d = nowDate {
+                            c.currentMonthDate = d
+                        }
+                    }
+                    
+                    nav.viewControllers.removeAll()
+                    nav.viewControllers.append(vc)
+                    
+                    //nav.popToViewController(controller, animated: true)
+                    
                 }else
                 {
                     nav.viewControllers[0] = vc

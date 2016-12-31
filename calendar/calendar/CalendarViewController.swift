@@ -500,6 +500,12 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         }
     }
     
+    public func reloadContent(){
+        loadTitle()
+        source = getSource(currentMonthDate)
+        cv.reloadData()
+    }
+    
     @IBAction func btnSelfTrigramTap(_ sender: Any) {
         
 //        let trigrams = defaultTrigramList.keys
