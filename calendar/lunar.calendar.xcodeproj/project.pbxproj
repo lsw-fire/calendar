@@ -11,6 +11,14 @@
 		191AF0881D7A90E900F794F1 /* DayColletionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191AF0871D7A90E900F794F1 /* DayColletionViewCell.swift */; };
 		191F8E101DBE1C40008BE9E9 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 191F8E0C1DBE1ABA008BE9E9 /* core.framework */; };
 		191F8E111DBE1C40008BE9E9 /* core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 191F8E0C1DBE1ABA008BE9E9 /* core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		19281BDB1E1DDE7400500C57 /* DayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19281BDA1E1DDE7400500C57 /* DayCell.xib */; };
+		19281BDD1E1DDE8B00500C57 /* WeekCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19281BDC1E1DDE8B00500C57 /* WeekCell.xib */; };
+		19281BDF1E1DDEF900500C57 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19281BDE1E1DDEF900500C57 /* DayCell.swift */; };
+		19281BE11E1DDF0A00500C57 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19281BE01E1DDF0A00500C57 /* WeekCell.swift */; };
+		19281BE31E1DE47000500C57 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19281BE21E1DE47000500C57 /* MonthView.swift */; };
+		19281BE51E1DE4A200500C57 /* MonthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19281BE41E1DE4A200500C57 /* MonthView.xib */; };
+		19281BE71E1E304600500C57 /* CalendarMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19281BE61E1E304600500C57 /* CalendarMonthView.swift */; };
+		19281BEB1E1E78D600500C57 /* CalendarViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19281BEA1E1E78D600500C57 /* CalendarViewController2.swift */; };
 		192F47761D842013009338A9 /* Source.json in Resources */ = {isa = PBXBuildFile; fileRef = 192F47751D842013009338A9 /* Source.json */; };
 		193E37B11D88073400FD8320 /* LabelTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193E37B01D88073400FD8320 /* LabelTapGestureRecognizer.swift */; };
 		193E37B31D8815B400FD8320 /* MonthViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193E37B21D8815B400FD8320 /* MonthViewLayout.swift */; };
@@ -69,6 +77,14 @@
 		191AF0851D7A847200F794F1 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		191AF0871D7A90E900F794F1 /* DayColletionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayColletionViewCell.swift; sourceTree = "<group>"; };
 		191F8E0C1DBE1ABA008BE9E9 /* core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		19281BDA1E1DDE7400500C57 /* DayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DayCell.xib; sourceTree = "<group>"; };
+		19281BDC1E1DDE8B00500C57 /* WeekCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeekCell.xib; sourceTree = "<group>"; };
+		19281BDE1E1DDEF900500C57 /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
+		19281BE01E1DDF0A00500C57 /* WeekCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
+		19281BE21E1DE47000500C57 /* MonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		19281BE41E1DE4A200500C57 /* MonthView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthView.xib; sourceTree = "<group>"; };
+		19281BE61E1E304600500C57 /* CalendarMonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarMonthView.swift; sourceTree = "<group>"; };
+		19281BEA1E1E78D600500C57 /* CalendarViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarViewController2.swift; path = 2/CalendarViewController2.swift; sourceTree = "<group>"; };
 		192F47751D842013009338A9 /* Source.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Source.json; sourceTree = "<group>"; };
 		193E37B01D88073400FD8320 /* LabelTapGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelTapGestureRecognizer.swift; sourceTree = "<group>"; };
 		193E37B21D8815B400FD8320 /* MonthViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthViewLayout.swift; sourceTree = "<group>"; };
@@ -124,6 +140,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19281BD91E1DDE0200500C57 /* 2 */ = {
+			isa = PBXGroup;
+			children = (
+				19281BDA1E1DDE7400500C57 /* DayCell.xib */,
+				19281BDE1E1DDEF900500C57 /* DayCell.swift */,
+				19281BDC1E1DDE8B00500C57 /* WeekCell.xib */,
+				19281BE01E1DDF0A00500C57 /* WeekCell.swift */,
+				19281BE41E1DE4A200500C57 /* MonthView.xib */,
+				19281BE21E1DE47000500C57 /* MonthView.swift */,
+				19281BE61E1E304600500C57 /* CalendarMonthView.swift */,
+				19281BEA1E1E78D600500C57 /* CalendarViewController2.swift */,
+			);
+			name = 2;
+			sourceTree = "<group>";
+		};
 		193E37AE1D88065500FD8320 /* gesture */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +214,7 @@
 		D7A779451BFD8ED500DB7B88 /* calendar */ = {
 			isa = PBXGroup;
 			children = (
+				19281BD91E1DDE0200500C57 /* 2 */,
 				193E37AF1D88067900FD8320 /* subControl */,
 				193E37AE1D88065500FD8320 /* gesture */,
 				194E8DC01D7FF51E001B6BC0 /* utility */,
@@ -336,8 +368,11 @@
 				192F47761D842013009338A9 /* Source.json in Resources */,
 				D7A779511BFD8ED500DB7B88 /* LaunchScreen.storyboard in Resources */,
 				D7A7794E1BFD8ED500DB7B88 /* Assets.xcassets in Resources */,
+				19281BDD1E1DDE8B00500C57 /* WeekCell.xib in Resources */,
 				1942D8031E067429000CC49B /* TrigramViewCell.xib in Resources */,
+				19281BDB1E1DDE7400500C57 /* DayCell.xib in Resources */,
 				196EA0CB1D8677C700D38822 /* Main.storyboard in Resources */,
+				19281BE51E1DE4A200500C57 /* MonthView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				194C74C31D843D510091E302 /* ApplicationResource.swift in Sources */,
+				19281BE71E1E304600500C57 /* CalendarMonthView.swift in Sources */,
 				1942D8011E0673BE000CC49B /* TrigramViewContainer.swift in Sources */,
 				194C2D3F1D7D8E65006F4F2C /* DayModel.swift in Sources */,
 				194C74C51D846C680091E302 /* ColorText.swift in Sources */,
@@ -370,10 +406,14 @@
 				193E37B11D88073400FD8320 /* LabelTapGestureRecognizer.swift in Sources */,
 				191AF0861D7A847200F794F1 /* CalendarViewController.swift in Sources */,
 				194C74C71D8653C10091E302 /* DateSelectController.swift in Sources */,
+				19281BDF1E1DDEF900500C57 /* DayCell.swift in Sources */,
 				191AF0881D7A90E900F794F1 /* DayColletionViewCell.swift in Sources */,
 				1942D8051E06A540000CC49B /* SelfTrigramViewController.swift in Sources */,
+				19281BE31E1DE47000500C57 /* MonthView.swift in Sources */,
+				19281BEB1E1E78D600500C57 /* CalendarViewController2.swift in Sources */,
 				19A892BF1D770AF8001C7B9E /* MonthController.swift in Sources */,
 				1942D7FF1E066463000CC49B /* TrigramViewCell.swift in Sources */,
+				19281BE11E1DDF0A00500C57 /* WeekCell.swift in Sources */,
 				193E37B31D8815B400FD8320 /* MonthViewLayout.swift in Sources */,
 				D7A779491BFD8ED500DB7B88 /* ViewController.swift in Sources */,
 				D7A779471BFD8ED500DB7B88 /* AppDelegate.swift in Sources */,
