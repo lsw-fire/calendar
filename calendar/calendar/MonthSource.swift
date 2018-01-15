@@ -10,9 +10,9 @@ import UIKit
 import core
 
 
-class MonthSource: NSObject {
+class MonthSource {
     
-    fileprivate var today : Date
+     var today : Date
     
     fileprivate let currentDay : Int
     fileprivate let currentMonth : Int
@@ -35,17 +35,17 @@ class MonthSource: NSObject {
         currentYear = today.year
         currentMonth = today.month
         
-        super.init()
+        //super.init()
     }
     
     func buildOneMonthSource(_ date: Date) -> Array<DayModel?> {
-        var source = Array<DayModel!>()
+        var source = Array<DayModel?>()
         
         let initialDay = date.day
         let initialYear = date.year
         let initialMonth = date.month
         let firstDate = Date(year: initialYear, month: initialMonth, day: 1)
-        let firstLunarDate = LunarDate(paramDate: firstDate)
+        let firstLunarDate = LunarDate(paramDate: firstDate, after11: false)
         
         //本月阳历1号所在的阴历月是几号，本月1号所在的阴历月一共多少天
         var numberOfLunarDaysInMonth = 0
@@ -74,7 +74,7 @@ class MonthSource: NSObject {
             offsetDay = 1 - dayOfWeek;
         }
         
-        let firstEraDayIn42 = LunarSolarTerm(paramDate: firstDate.plusDays(offsetDay))
+        let firstEraDayIn42 = LunarSolarTerm(paramDate: firstDate.plusDays(offsetDay), after11: false)
         let firstEraIndexIn42 = firstEraDayIn42.getChineseEraOfDay()
         let pairSolarTerm = LunarSolarTerm.getSolarTerm(date.year, month: date.month)
         var dicSolarTerm : Dictionary<String,String> = Dictionary<String,String>()
@@ -110,7 +110,7 @@ class MonthSource: NSObject {
                 //农历已经到了下个月，从新计算转天农历所在的月有多少天
                 if lunarIndex > numberOfLunarDaysInMonth && lunarNextMonthDate == nil{
                     
-                    lunarNextMonthDate = LunarDate(paramDate: firstDate.plusDays(itemIndex - absOffset))
+                    lunarNextMonthDate = LunarDate(paramDate: firstDate.plusDays(itemIndex - absOffset), after11: false)
                     
                     if lunarNextMonthDate.isLeapMonth {
                         numberOfLunarDaysInMonth = firstLunarDate.getChineseLeapMonthDays(lunarNextMonthDate.lunarYear)

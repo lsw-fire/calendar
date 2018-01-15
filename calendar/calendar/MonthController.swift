@@ -31,7 +31,7 @@ class MonthController: UIViewController , UIScrollViewDelegate{
             slRight.fillColor = UIColor.white.cgColor
             slRight.strokeColor = UIColor.gray.cgColor
             
-            print("left-lsw"+(point?.x.description)!)
+            //print("left-lsw"+(point?.x.description)!)
             
             
             
@@ -58,11 +58,11 @@ class MonthController: UIViewController , UIScrollViewDelegate{
             slLeft.fillColor = UIColor.white.cgColor
             slLeft.strokeColor = UIColor.gray.cgColor
             
-            print("right-lsw"+(point?.x.description)!)
+            //print("right-lsw"+(point?.x.description)!)
         }
         else
         {
-            print(point?.x)
+            //print(point?.x)
         }
     }
     enum ScrollState : Int{
@@ -86,74 +86,61 @@ class MonthController: UIViewController , UIScrollViewDelegate{
 
         // Do any additional setup after loading the view.
         
-        
+      
       reloadView()
         
         _scrollView.delegate = self
         
-       
-//        bezierPath.move(to: CGPoint(x: 10.5, y: 8.5))
-//        bezierPath.addCurve(to: CGPoint(x:40.5,y:8.5), controlPoint1: CGPoint(x:39.5,y:8.5), controlPoint2: CGPoint(x:40.5,y:8.5))
-//        bezierPath.addLine(to: CGPoint(x:26.39,y:22.3))
-//        bezierPath.addLine(to: CGPoint(x:25.2,y:23.5))
-//        bezierPath.addLine(to: CGPoint(x:10.5,y:8.5))
-//        //let st = UIColor.black.setStroke()
-//        bezierPath.lineWidth = 1
-//        bezierPath.stroke()
-        
-        
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        
-        let xHalf = btnTest.frame.width/2
-        let xFull = btnTest.frame.width
-        
-        let yHalf = btnTest.frame.height/2
-        let yFull = btnTest.frame.height
-        
-        let bezierPath = UIBezierPath()
-        
-        bezierPath.move(to: CGPoint(x: 0, y: 0))
-        bezierPath.addLine(to: CGPoint(x: xHalf, y: 0))
-        bezierPath.addLine(to: CGPoint(x: xHalf + 10, y: yHalf))
-        bezierPath.addLine(to: CGPoint(x: xHalf, y: yFull))
-        bezierPath.addLine(to: CGPoint(x: 0, y: yFull))
-        bezierPath.close()
-        bezierPath.stroke()
-        
-        let bezierPathRight = UIBezierPath()
-        bezierPathRight.move(to: CGPoint(x: xHalf+1, y: 0))
-        bezierPathRight.addLine(to: CGPoint(x: xFull-1, y: 0))
-        bezierPathRight.addLine(to: CGPoint(x: xFull-1, y: yFull))
-        bezierPathRight.addLine(to: CGPoint(x: xHalf+1, y: yFull))
-        bezierPathRight.addLine(to: CGPoint(x: xHalf+11, y:yHalf))
-        bezierPathRight.close()
-        bezierPathRight.stroke()
-        
-        slLeft.frame = btnTest.bounds
-        slLeft.path = bezierPath.cgPath
-        slLeft.fillColor = UIColor.white.cgColor
-        slLeft.strokeColor = UIColor.gray.cgColor
-        slLeft.lineWidth = 1
-        //        btnTest.layer.masksToBounds = true
-        //        btnTest.layer.mask = sl
-        
-        btnTest.layer.addSublayer(slLeft)
-        
-        slRight.frame = btnTest.bounds
-        slRight.path = bezierPathRight.cgPath
-        slRight.fillColor = UIColor.gray.cgColor
-        slRight.strokeColor = UIColor.white.cgColor
-        slRight.lineWidth = 1
-        //        btnTest.layer.masksToBounds = true
-        //        btnTest.layer.mask = sl
-        
-        btnTest.layer.addSublayer(slRight)
+        DispatchQueue.main.async {
+            let xHalf = self.btnTest.frame.width/2
+            let xFull = self.btnTest.frame.width
+            
+            let yHalf = self.btnTest.frame.height/2
+            let yFull = self.btnTest.frame.height
+            
+            let bezierPath = UIBezierPath()
+            
+            bezierPath.move(to: CGPoint(x: 0, y: 0))
+            bezierPath.addLine(to: CGPoint(x: xHalf, y: 0))
+            bezierPath.addLine(to: CGPoint(x: xHalf + 10, y: yHalf))
+            bezierPath.addLine(to: CGPoint(x: xHalf, y: yFull))
+            bezierPath.addLine(to: CGPoint(x: 0, y: yFull))
+            bezierPath.close()
+            bezierPath.stroke()
+            
+            let bezierPathRight = UIBezierPath()
+            bezierPathRight.move(to: CGPoint(x: xHalf+1, y: 0))
+            bezierPathRight.addLine(to: CGPoint(x: xFull-1, y: 0))
+            bezierPathRight.addLine(to: CGPoint(x: xFull-1, y: yFull))
+            bezierPathRight.addLine(to: CGPoint(x: xHalf+1, y: yFull))
+            bezierPathRight.addLine(to: CGPoint(x: xHalf+11, y:yHalf))
+            bezierPathRight.close()
+            bezierPathRight.stroke()
+            
+            self.slLeft.frame = self.btnTest.bounds
+            self.slLeft.path = bezierPath.cgPath
+            self.slLeft.fillColor = UIColor.white.cgColor
+            self.slLeft.strokeColor = UIColor.gray.cgColor
+            self.slLeft.lineWidth = 1
+            //        btnTest.layer.masksToBounds = true
+            //        btnTest.layer.mask = sl
+            
+            self.btnTest.layer.addSublayer(self.slLeft)
+            
+            self.slRight.frame = self.btnTest.bounds
+            self.slRight.path = bezierPathRight.cgPath
+            self.slRight.fillColor = UIColor.gray.cgColor
+            self.slRight.strokeColor = UIColor.white.cgColor
+            self.slRight.lineWidth = 1
+            //        btnTest.layer.masksToBounds = true
+            //        btnTest.layer.mask = sl
+            
+            self.btnTest.layer.addSublayer(self.slRight)
+        }
 
+        
+        
     }
-    
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.scrollBeginOffset = scrollView.contentOffset.x
@@ -234,15 +221,15 @@ class MonthController: UIViewController , UIScrollViewDelegate{
         _scrollView.contentOffset = CGPoint(x: width, y: 0)
         
         
-        _lView = UIView.init(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        _lView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         _lView.backgroundColor = UIColor.red
         _scrollView.addSubview(_lView)
         
-        _mView = UIView.init(frame: CGRect(x: width, y: 0, width: width, height: height))
+        _mView = UIView(frame: CGRect(x: width, y: 0, width: width, height: height))
         _mView.backgroundColor = UIColor.yellow
         _scrollView.addSubview(_mView)
         
-        _rView = UIView.init(frame: CGRect(x: width*2, y: 0, width: width, height: height))
+        _rView = UIView(frame: CGRect(x: width*2, y: 0, width: width, height: height))
         _rView.backgroundColor = UIColor.blue
         _scrollView.addSubview(_rView)
     }

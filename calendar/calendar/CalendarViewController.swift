@@ -64,6 +64,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
         }
         
         dateSelectController.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        dateSelectController.modalTransitionStyle = .crossDissolve
         self.present(dateSelectController, animated: true, completion: nil)
         
     }
@@ -143,6 +144,12 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
 //            let str1 = ziBai1.calculateSelfTrigram()
 //            print(str1)
 //        }
+         source = getSource(currentMonthDate)
+        
+        DispatchQueue.main.async {
+            
+//            self.reloadView()
+        }
         
     }
     
@@ -161,19 +168,19 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        self.navigationController?.isNavigationBarHidden = true
+        //self.navigationController?.isNavigationBarHidden = true
         
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.navigationController?.isNavigationBarHidden = false
+        //self.navigationController?.isNavigationBarHidden = false
         
     }
     
     func loadTitle()  {
         lbSelectedDateTime.text = currentMonthDate.toFormatString(dateFormat)
-        let lunarST = LunarSolarTerm(paramDate: currentMonthDate)
+        let lunarST = LunarSolarTerm(paramDate: currentMonthDate, after11: false)
         let eraY = lunarST.getEraYearText()
         let eraM = lunarST.getEraMonthText()
         let eraD = lunarST.getEraDayText()
@@ -216,7 +223,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
             //selectDateTopConstraint.constant = 10
         }
         
-        source = getSource(currentMonthDate)
+       
         
         let layout = MonthViewLayout()
         
@@ -419,7 +426,7 @@ class CalendarViewController: UIViewController,UICollectionViewDataSource, UICol
                 
                 cell.lbDay.textColor = UIColor.white
                 cell.lbDay.backgroundColor = UIColor.orange
-                print(cell.lbDay.text)
+                //print(cell.lbDay.text)
             }
             else if(model.isSelected && !model.isToday && selectedDay == model.day)
             {

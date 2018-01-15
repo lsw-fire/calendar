@@ -13,7 +13,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let callActionHandler = { (action:UIAlertAction!) -> Void in
+        let _ = { (action:UIAlertAction!) -> Void in
             
             let alertMessage = UIAlertController(title: "", message: "", preferredStyle: .alert)
             

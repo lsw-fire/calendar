@@ -24,7 +24,7 @@ class ColorText: NSObject {
             
             let cColor = ApplicationResource.sharedInstance.getCelestialPropertyBy(celestial)["Color"]
             let cUIColor = ApplicationResource.sharedInstance.colorDictionary[cColor!]
-            let cAttribute = [NSForegroundColorAttributeName : cUIColor!]
+                let cAttribute = [NSAttributedStringKey.foregroundColor : cUIColor!]
             let cString = NSAttributedString(string: celestial, attributes: cAttribute)
             
             listString.append(cString)
@@ -41,7 +41,7 @@ class ColorText: NSObject {
                 
             let tColor = ApplicationResource.sharedInstance.getTerrestialPropertyBy(terrestial)["Color"]
             let tUIColor = ApplicationResource.sharedInstance.colorDictionary[tColor! as! String]
-            let tAttribute = [NSForegroundColorAttributeName : tUIColor!]
+                let tAttribute = [NSAttributedStringKey.foregroundColor : tUIColor!]
             let tString = NSAttributedString(string: terrestial, attributes: tAttribute)
             
             listString.append(tString)

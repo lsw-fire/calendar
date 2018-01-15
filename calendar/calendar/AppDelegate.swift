@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         //ApplicationResource.sharedInstance
         
-        var navigationBarAppearance = UINavigationBar.appearance()
+        let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.tintColor = UIColor.darkGray
         
         return true

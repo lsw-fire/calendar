@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		191AF0861D7A847200F794F1 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191AF0851D7A847200F794F1 /* CalendarViewController.swift */; };
 		191AF0881D7A90E900F794F1 /* DayColletionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191AF0871D7A90E900F794F1 /* DayColletionViewCell.swift */; };
-		191F8E101DBE1C40008BE9E9 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 191F8E0C1DBE1ABA008BE9E9 /* core.framework */; };
-		191F8E111DBE1C40008BE9E9 /* core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 191F8E0C1DBE1ABA008BE9E9 /* core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		192F47761D842013009338A9 /* Source.json in Resources */ = {isa = PBXBuildFile; fileRef = 192F47751D842013009338A9 /* Source.json */; };
 		193E37B11D88073400FD8320 /* LabelTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193E37B01D88073400FD8320 /* LabelTapGestureRecognizer.swift */; };
 		193E37B31D8815B400FD8320 /* MonthViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193E37B21D8815B400FD8320 /* MonthViewLayout.swift */; };
@@ -25,6 +23,12 @@
 		196EA0CB1D8677C700D38822 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 196EA0C91D8677C700D38822 /* Main.storyboard */; };
 		199FD5C61D8EBB7C005A4980 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199FD5C51D8EBB7C005A4980 /* SettingViewController.swift */; };
 		19A892BF1D770AF8001C7B9E /* MonthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A892BE1D770AF8001C7B9E /* MonthController.swift */; };
+		19D158612009F992002A9AB9 /* core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 191F8E0C1DBE1ABA008BE9E9 /* core.framework */; };
+		19D158622009F992002A9AB9 /* core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 191F8E0C1DBE1ABA008BE9E9 /* core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		19D15865200A027A002A9AB9 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D15864200A027A002A9AB9 /* SwiftyJSON.framework */; };
+		19D15866200A027A002A9AB9 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19D15864200A027A002A9AB9 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		19D15868200A027E002A9AB9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D15867200A027E002A9AB9 /* Alamofire.framework */; };
+		19D15869200A027E002A9AB9 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19D15867200A027E002A9AB9 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		19D2C6CC1D82D9E2001F0565 /* MonthSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D2C6CB1D82D9E2001F0565 /* MonthSource.swift */; };
 		D7A779471BFD8ED500DB7B88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A779461BFD8ED500DB7B88 /* AppDelegate.swift */; };
 		D7A779491BFD8ED500DB7B88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A779481BFD8ED500DB7B88 /* ViewController.swift */; };
@@ -52,13 +56,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		191F8E121DBE1C41008BE9E9 /* Embed Frameworks */ = {
+		19D158632009F993002A9AB9 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				191F8E111DBE1C40008BE9E9 /* core.framework in Embed Frameworks */,
+				19D15866200A027A002A9AB9 /* SwiftyJSON.framework in Embed Frameworks */,
+				19D15869200A027E002A9AB9 /* Alamofire.framework in Embed Frameworks */,
+				19D158622009F992002A9AB9 /* core.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,6 +89,8 @@
 		196EA0CA1D8677C700D38822 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = calendar/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		199FD5C51D8EBB7C005A4980 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		19A892BE1D770AF8001C7B9E /* MonthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthController.swift; sourceTree = "<group>"; };
+		19D15864200A027A002A9AB9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		19D15867200A027E002A9AB9 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19D2C6CB1D82D9E2001F0565 /* MonthSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthSource.swift; sourceTree = "<group>"; };
 		D7A779431BFD8ED500DB7B88 /* calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7A779461BFD8ED500DB7B88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,7 +111,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				191F8E101DBE1C40008BE9E9 /* core.framework in Frameworks */,
+				19D15865200A027A002A9AB9 /* SwiftyJSON.framework in Frameworks */,
+				19D15868200A027E002A9AB9 /* Alamofire.framework in Frameworks */,
+				19D158612009F992002A9AB9 /* core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +172,8 @@
 		D7A7793A1BFD8ED500DB7B88 = {
 			isa = PBXGroup;
 			children = (
+				19D15867200A027E002A9AB9 /* Alamofire.framework */,
+				19D15864200A027A002A9AB9 /* SwiftyJSON.framework */,
 				191F8E0C1DBE1ABA008BE9E9 /* core.framework */,
 				D7A779451BFD8ED500DB7B88 /* calendar */,
 				D7A7795A1BFD8ED500DB7B88 /* calendarTests */,
@@ -234,7 +246,7 @@
 				D7A7793F1BFD8ED500DB7B88 /* Sources */,
 				D7A779401BFD8ED500DB7B88 /* Frameworks */,
 				D7A779411BFD8ED500DB7B88 /* Resources */,
-				191F8E121DBE1C41008BE9E9 /* Embed Frameworks */,
+				19D158632009F993002A9AB9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -535,7 +547,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -553,7 +565,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

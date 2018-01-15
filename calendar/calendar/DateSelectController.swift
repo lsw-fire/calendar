@@ -33,7 +33,7 @@ class DateSelectController: UIViewController, UIPopoverPresentationControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nsLocal = Locale.init(identifier: "zh_CN")
+        let nsLocal = Locale(identifier: "zh_CN")
         
         datePicker.date = selectedDate
         datePicker.datePickerMode = UIDatePickerMode.date
